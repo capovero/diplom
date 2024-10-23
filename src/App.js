@@ -1,10 +1,10 @@
 import './App.css';
-import ModalWindow from './components/ModalWindow';
+import SignIn from './components/Registration/SignIn';
 
 function App() {
   return (
     <div className="App">
-      <ModalWindow />
+      <SignIn />
     </div>
   );
 }
