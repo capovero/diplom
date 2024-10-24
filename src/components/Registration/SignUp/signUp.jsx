@@ -34,7 +34,7 @@ const SignUp = () => {
                                 <ErrorMessage name="username" component="div" style={{ color: 'red' }} />
                             </div>
                             <div>
-                                <Input type="email" name="email" placeholder="Email" />
+                                <Input type="text" name="email" placeholder="Email" />
                                 <ErrorMessage name="email" component="div" style={{ color: 'red' }} />
                             </div>
                             <div>

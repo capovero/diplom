@@ -21,7 +21,7 @@ export const ModalContent = styled.div`
 export const Title = styled.h1`
     color: #ffcc00; /* Золотистый цвет заголовка */
     margin-bottom: 20px;
-    font-size: 28px;
+    font-size: 35px;
 `;
 
 export const Button = styled.button`

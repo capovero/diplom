@@ -21,7 +21,7 @@ export const ModalContent = styled.div`
 export const Title = styled.h1`
     color: #ffcc00; /* Золотистый цвет заголовка */
     margin-bottom: 20px;
-    font-size: 28px;
+    font-size: 35px;
 `;
 
 export const Button = styled.button`
@@ -41,7 +41,7 @@ export const Button = styled.button`
     }
 `;
 
-export const LoginButton = styled.button`
+export const SignUpButton = styled.button`
     background: none;
     color: #28a745; /* Зеленый цвет */
     margin-top: 10px;
