@@ -25,7 +25,12 @@ const SignUp = ({switchToSignIn}) => {
                     initialValues={{ username: '', email: '', password: '' }}
                     onSubmit={(values, actions) => {
                         console.log(values);
+                        const users = JSON.parse(localStorage.getItem('users')) || [];
+                        users.push(values)
+                        localStorage.setItem('users', JSON.stringify(users))
+                        console.log('User registered ', values);
                         actions.setSubmitting(false);
+                        switchToSignIn();
                     }}>
                     {({ isSubmitting }) => (
                         <Form>

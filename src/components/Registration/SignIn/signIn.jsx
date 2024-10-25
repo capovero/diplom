@@ -21,7 +21,17 @@ const SignIn = ({switchToSignUp}) => {
                     validationSchema={validationSchema}
                     initialValues={{ username: '', password: '' }}
                     onSubmit={(values, actions) => {
-                        console.log(values);
+                        const users = JSON.parse(localStorage.getItem('users')) || [];
+                        const user = users.find(user =>
+                            user.username === values.username && user.password === values.password
+                        );
+                        if (user) {
+                            console.log('User registered ', user);
+                            alert('Login successful!');}
+                        else {
+                            console.log('Invalid username or password');
+                            alert('Invalid username or password');
+                        }
                         actions.setSubmitting(false);
                     }}>
                     {({ isSubmitting }) => (
