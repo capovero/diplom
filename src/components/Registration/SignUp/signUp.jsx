@@ -15,7 +15,7 @@ const validationSchema = Yup.object({
         .required('Password is required'), // Пароль обязателен
 });
 
-const SignUp = () => {
+const SignUp = ({switchToSignIn}) => {
     return (
         <ModalContainer>
             <ModalContent>
@@ -42,7 +42,7 @@ const SignUp = () => {
                                 <ErrorMessage name="password" component="div" style={{ color: 'red' }} />
                             </div>
                             <Button type="submit" disabled={isSubmitting}>Sign up</Button>
-                            <LoginButton type="button">Sign In</LoginButton>
+                            <LoginButton type="button" onClick={switchToSignIn}>Sign In</LoginButton>
                         </Form>
                     )}
                 </Formik>
