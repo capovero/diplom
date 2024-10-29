@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CrowdfundingPlatformBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b5b311c83a43c5ec9949caa0ad508b92f38b402")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ffd1cdfa2cc02be318690e8c991519e91ef58b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("CrowdfundingPlatformBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CrowdfundingPlatformBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
