@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "iNfp9fydJjfmAf8i32fnKlo8MQxzqLDZRhj0LKUvyn8=",
+  "Source": "CrowdfundingPlatformBackend",
+  "BasePath": "_content/CrowdfundingPlatformBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
