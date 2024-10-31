@@ -52,7 +52,7 @@ using (ApplicationContext db = new ApplicationContext())
     
     db.Users.Add(Tom);
     db.Users.Add(Bob);
-    db.SaveChanges();
+    //db.SaveChanges();
     Console.WriteLine("SaveChanges");
 
     var Users = db.Users.ToList();
