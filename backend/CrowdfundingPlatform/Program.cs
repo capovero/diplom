@@ -28,7 +28,9 @@ app.UseHttpsRedirection();
 using var scope = app.Services.CreateScope();
 var userService = scope.ServiceProvider.GetRequiredService<UserService>();
 
-userService.AddUser();
+// userService.AddUser();
+// userService.DeleteUser();
+userService.UpdateUser();
 
 var users = userService.GetUsers();
 foreach (var user in users)
