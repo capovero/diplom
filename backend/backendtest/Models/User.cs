@@ -1,9 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace backendtest.Models;
 
+//
 public class User
 {
     public const int MAX_USERNAME_LENGTH = 50;
-  
+    private User() { }
+
     private User(Guid id, string userName, string email, string password)
     {
         Id = id;
@@ -11,12 +15,13 @@ public class User
         Email = email;
         Password = password;
     }
-    public Guid Id { get; }
+     [Key]
+    public Guid Id { get; set;  }
     public string UserName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
 
-    public static(User User, string error) Create(Guid id, string userName, string email, string password)
+    public static (User? User, string error) Create(Guid id, string userName, string email, string password)
     {
         var error = string.Empty;
 
