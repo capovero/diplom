@@ -133,3 +133,4 @@
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/backendtest.pdb
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/backendtest.genruntimeconfig.cache
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/ref/backendtest.dll
+/home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/BCrypt.Net-Next.dll

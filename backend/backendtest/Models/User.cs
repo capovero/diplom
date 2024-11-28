@@ -6,20 +6,20 @@ namespace backendtest.Models;
 public class User
 {
     public const int MAX_USERNAME_LENGTH = 50;
-    private User() { }
+    public User() { }
 
-    private User(Guid id, string userName, string email, string password)
+    public User(Guid id, string userName, string email, string password)
     {
         Id = id;
         UserName = userName;
         Email = email;
-        Password = password;
+        PasswordHash = password;
     }
      [Key]
     public Guid Id { get; set;  }
     public string UserName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
 
     public static (User? User, string error) Create(Guid id, string userName, string email, string password)
     {

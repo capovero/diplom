@@ -1,5 +1,8 @@
 using backendtest.Data;
+using backendtest.Dtos.UserDto;
+using backendtest.HashPassword;
 using backendtest.Mappers;
+using backendtest.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backendtest.Controllers;
@@ -31,4 +34,25 @@ public class UserController : ControllerBase
         }
         return Ok(user.ToUserDto());
     }
+
+    [HttpPost("register")]
+    public IActionResult Register(CreateUserDto createUserDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest("Некорректные данные.");
+        }
+        var newUser = new User
+        {
+            Id = Guid.NewGuid(),
+            UserName = createUserDto.UserName,
+            Email = createUserDto.Email,
+            PasswordHash = PasswordHelper.HashPassword(createUserDto.Password)
+        };
+        _context.Users.Add(newUser);
+        _context.SaveChanges();
+
+        return Ok("Пользователь успешно зарегистрирован!");
+    }
+    
 }

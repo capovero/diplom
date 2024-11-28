@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "MHFRIy1aHIU=",
+  "dgSpecHash": "L/hpeB9za+0=",
   "success": true,
   "projectFilePath": "/home/capo/my_directory/programming/diplom/backend/backendtest/backendtest.csproj",
   "expectedPackageFiles": [
+    "/home/capo/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/home/capo/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/capo/.nuget/packages/microsoft.aspnetcore.openapi/8.0.10/microsoft.aspnetcore.openapi.8.0.10.nupkg.sha512",
     "/home/capo/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
