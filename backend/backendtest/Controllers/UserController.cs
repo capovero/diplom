@@ -1,8 +1,9 @@
 using backendtest.Data;
+using backendtest.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backendtest.Controllers;
-[Route("api/stock")]
+[Route("api/user")]
 [ApiController]
 public class UserController : ControllerBase
 {
@@ -15,7 +16,8 @@ public class UserController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
-        var users = _context.Users.ToList();
+        var users = _context.Users.ToList()
+            .Select(u => u.ToUserDto());
         return Ok(users);
     }
 
@@ -27,6 +29,6 @@ public class UserController : ControllerBase
         {
             return NotFound();
         }
-        return Ok(user);
+        return Ok(user.ToUserDto());
     }
 }
