@@ -39,6 +39,18 @@ public class UserController : ControllerBase
         return Ok(user.ToUserDto());
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var result = await _userRepo.DeleteAsync(id);
+        if(!result)
+        {
+            return NotFound();
+        }
+        return Ok();
+        
+    }
+
     [HttpPost("register")]
     public async Task <IActionResult> Register(CreateUserDto createUserDto)
     {
