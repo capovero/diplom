@@ -50,7 +50,7 @@ public class UserController : ControllerBase
         return Ok();
         
     }
-
+//переписать метод регистрации
     [HttpPost("register")]
     public async Task <IActionResult> Register(CreateUserDto createUserDto)
     {
@@ -69,6 +69,17 @@ public class UserController : ControllerBase
         await _context.SaveChangesAsync();
 
         return Ok("Пользователь успешно зарегистрирован!");
-    } 
+    }
+
+    [HttpPut("id")]
+    public async Task<IActionResult> Update(Guid id, UpdateUserDto updateUserDto)
+    {
+        var result = await _userRepo.UpdateAsync(id, updateUserDto);
+        if (!result)
+        {
+            return NotFound();
+        }
+        return Ok();
+    }
     
 }

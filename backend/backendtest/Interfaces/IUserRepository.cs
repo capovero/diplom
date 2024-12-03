@@ -1,3 +1,4 @@
+using backendtest.Dtos.UserDto;
 using backendtest.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,4 +8,6 @@ public interface IUserRepository
 {
     Task<List<User>> GetAllAsync();
     Task<bool> DeleteAsync(Guid id);
+    
+    Task<bool> UpdateAsync(Guid id, UpdateUserDto updateUserDto); // Метод принимает ID и данные для обновления
 }

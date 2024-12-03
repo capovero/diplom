@@ -27,4 +27,11 @@ public static class UserMappers
         };
     }
 
+    //мой ласт маппер - потом проверить правильность
+    public static void ToUpdateUserDto(this User user, UpdateUserDto updateUserDto)
+    {
+        user.UserName = updateUserDto.UserName;
+        user.Email = updateUserDto.Email;
+    }
+
 }
