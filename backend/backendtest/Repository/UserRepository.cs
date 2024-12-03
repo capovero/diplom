@@ -1,6 +1,7 @@
 using System.Net.Mime;
 using backendtest.Data;
 using backendtest.Dtos.UserDto;
+using backendtest.HashPassword;
 using backendtest.Interfaces;
 using backendtest.Mappers;
 using backendtest.Models;
@@ -30,6 +31,20 @@ namespace backendtest.Repository
                 return false;
             }
             _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RegisterAsync(CreateUserDto createUserDto)
+        {
+            var newUser = new User
+            {
+                Id = Guid.NewGuid(),
+                UserName = createUserDto.UserName,
+                Email = createUserDto.Email,
+                PasswordHash = PasswordHelper.HashPassword(createUserDto.Password)
+            };
+            await _context.Users.AddAsync(newUser);
             await _context.SaveChangesAsync();
             return true;
         }

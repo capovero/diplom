@@ -54,21 +54,16 @@ public class UserController : ControllerBase
     [HttpPost("register")]
     public async Task <IActionResult> Register(CreateUserDto createUserDto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest("Некорректные данные.");
-        }
-        var newUser = new User
-        {
-            Id = Guid.NewGuid(),
-            UserName = createUserDto.UserName,
-            Email = createUserDto.Email,
-            PasswordHash = PasswordHelper.HashPassword(createUserDto.Password)
-        };
-        await _context.Users.AddAsync(newUser);
-        await _context.SaveChangesAsync();
-
-        return Ok("Пользователь успешно зарегистрирован!");
+    if (!ModelState.IsValid)
+    {
+        return BadRequest("Некорректные данные.");
+    }
+    var resault = await _userRepo.RegisterAsync(createUserDto);
+    if (!resault)
+    {
+        return NotFound();
+    }
+    return Ok("Пользователь успешно зарегистрирован!");
     }
 
     [HttpPut("id")]
