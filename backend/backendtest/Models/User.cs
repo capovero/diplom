@@ -8,18 +8,20 @@ public class User
     public const int MAX_USERNAME_LENGTH = 50;
     public User() { }
 
-    public User(Guid id, string userName, string email, string password)
+    public User(Guid id, string userName, string email, string password , string role)
     {
         Id = id;
         UserName = userName;
         Email = email;
         PasswordHash = password;
+        Role = role;
     }
      [Key]
     public Guid Id { get; set;  }
     public string UserName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
-    public string PasswordHash { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty; 
+    public string Role { get; set; } = "User"; 
 
     public static (User? User, string error) Create(Guid id, string userName, string email, string password)
     {
@@ -38,7 +40,7 @@ public class User
         {
             return (null, "Password must be at least 8 characters long.");
         }
-        var user = new User(id, userName, email, password);
+        var user = new User(id, userName, email, password, "User");
         return (user, error);
     }
 }

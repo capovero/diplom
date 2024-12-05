@@ -63,5 +63,10 @@ namespace backendtest.Repository
             return true;
         }
 
+        // public async Task<string> LoginAsync(LoginUserDto loginUserDto)
+        // {
+        //     return "zatichka"; // затычка 
+        // }
+
     }
 }

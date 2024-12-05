@@ -50,7 +50,7 @@ public class UserController : ControllerBase
         return Ok();
         
     }
-//переписать метод регистрации
+    
     [HttpPost("register")]
     public async Task <IActionResult> Register(CreateUserDto createUserDto)
     {

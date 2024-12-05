@@ -11,4 +11,6 @@ public interface IUserRepository
 
     Task<bool> RegisterAsync(CreateUserDto createUserDto);
     Task<bool> UpdateAsync(Guid id, UpdateUserDto updateUserDto); // Метод принимает ID и данные для обновления
+
+    // Task<string> LoginAsync();
 }
