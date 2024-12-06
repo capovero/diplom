@@ -63,10 +63,9 @@ namespace backendtest.Repository
             return true;
         }
 
-        // public async Task<string> LoginAsync(LoginUserDto loginUserDto)
-        // {
-        //     return "zatichka"; // затычка 
-        // }
-
+        public async Task<User?> LoginAsync(string UserName)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.UserName == UserName);
+        }
     }
 }

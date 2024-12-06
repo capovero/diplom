@@ -14,6 +14,7 @@ public class UserController : ControllerBase
 {
     private readonly ApplicationContext _context;
     private readonly IUserRepository _userRepo;
+    private readonly IAuthInterface _auth;
     public UserController(ApplicationContext context, IUserRepository userRepo)
     { 
         _userRepo = userRepo;
@@ -76,5 +77,13 @@ public class UserController : ControllerBase
         }
         return Ok();
     }
-    
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginUserDto loginUserDto)
+    {
+        // var user = await _userRepo.
+        // Написать логику для  jwt
+        return Ok();
+    }
+
 }
