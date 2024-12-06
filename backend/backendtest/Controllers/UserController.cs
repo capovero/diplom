@@ -15,10 +15,11 @@ public class UserController : ControllerBase
     private readonly ApplicationContext _context;
     private readonly IUserRepository _userRepo;
     private readonly IAuthInterface _auth;
-    public UserController(ApplicationContext context, IUserRepository userRepo)
+    public UserController(ApplicationContext context, IUserRepository userRepo, IAuthInterface auth)
     { 
         _userRepo = userRepo;
         _context = context;   
+        _auth = auth;
     }
 
     [HttpGet]
@@ -79,11 +80,22 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginUserDto loginUserDto)
+    public async Task<IActionResult> LoginAsync(LoginUserDto loginUserDto)
     {
-        // var user = await _userRepo.
+        var user = await _userRepo.LoginAsync(loginUserDto.UserName);
+        if (user == null)
+        {
+            return Unauthorized();
+        }
+
+        if (!BCrypt.Net.BCrypt.Verify(loginUserDto.Password, user.PasswordHash))
+        {
+            return Unauthorized();
+        }
+
+        var token = _auth.GenerateToken(user.UserName, user.Role);
         // Написать логику для  jwt
-        return Ok();
+        return Ok(new {token});
     }
 
 }

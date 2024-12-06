@@ -134,3 +134,11 @@
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/backendtest.genruntimeconfig.cache
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/ref/backendtest.dll
 /home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/BCrypt.Net-Next.dll
+/home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/Microsoft.IdentityModel.Abstractions.dll
+/home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/Microsoft.IdentityModel.Logging.dll
+/home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/Microsoft.IdentityModel.Protocols.dll
+/home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/Microsoft.IdentityModel.Tokens.dll
+/home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/System.IdentityModel.Tokens.Jwt.dll

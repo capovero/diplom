@@ -1,6 +1,7 @@
 using backendtest.Data;
 using backendtest.Interfaces;
 using backendtest.Repository;
+using backendtest.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAuthInterface, AuthService>();        // Регистрация сервиса авторизации
 
 var app = builder.Build();
 
