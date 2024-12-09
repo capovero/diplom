@@ -15,7 +15,7 @@ public class AuthService : IAuthInterface
         _configuration = configuration;
     }
 
-    public string GenerateToken(string userName, string role)
+    public string GenerateToken(Guid id, string role)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);  // Секретный ключ из конфигурации
@@ -24,7 +24,7 @@ public class AuthService : IAuthInterface
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Name, userName),
+                new Claim(ClaimTypes.NameIdentifier, id.ToString()),
                 new Claim(ClaimTypes.Role, role)
             }),
             Expires = DateTime.UtcNow.AddHours(1),

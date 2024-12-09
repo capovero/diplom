@@ -2,5 +2,5 @@ namespace backendtest.Interfaces;
 
 public interface IAuthInterface
 {
-    string GenerateToken(string username, string role);
+    string GenerateToken(Guid id, string role);
 }

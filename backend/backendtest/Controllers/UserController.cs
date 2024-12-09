@@ -93,8 +93,7 @@ public class UserController : ControllerBase
             return Unauthorized();
         }
 
-        var token = _auth.GenerateToken(user.UserName, user.Role);
-        // Написать логику для  jwt
+        var token = _auth.GenerateToken(user.Id, user.Role);
         return Ok(new {token});
     }
 
