@@ -94,7 +94,8 @@ public class UserController : ControllerBase
         }
 
         var token = _auth.GenerateToken(user.Id, user.Role);
-        return Ok(new {token});
+        HttpContext.Response.Cookies.Append("cookies", token);
+        return Ok();
     }
 
 }

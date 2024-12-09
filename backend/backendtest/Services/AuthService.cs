@@ -18,7 +18,7 @@ public class AuthService : IAuthInterface
     public string GenerateToken(Guid id, string role)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);  // Секретный ключ из конфигурации
+        var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);  
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -27,7 +27,7 @@ public class AuthService : IAuthInterface
                 new Claim(ClaimTypes.NameIdentifier, id.ToString()),
                 new Claim(ClaimTypes.Role, role)
             }),
-            Expires = DateTime.UtcNow.AddHours(1),
+            Expires = DateTime.UtcNow.AddHours(24),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 
