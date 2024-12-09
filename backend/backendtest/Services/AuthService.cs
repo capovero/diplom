@@ -18,7 +18,7 @@ public class AuthService : IAuthInterface
     public string GenerateToken(Guid id, string role)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);  
+        var key = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Jwt:Secret"));
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {

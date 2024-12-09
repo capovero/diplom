@@ -127,7 +127,6 @@
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/staticwebassets/msbuild.buildTransitive.backendtest.props
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/staticwebassets.pack.json
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/scopedcss/bundle/backendtest.styles.css
-/home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/backendtest.csproj.CopyComplete
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/backendtest.dll
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/refint/backendtest.dll
 /home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/backendtest.pdb
@@ -142,3 +141,7 @@
 /home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/Microsoft.IdentityModel.Tokens.dll
 /home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/System.IdentityModel.Tokens.Jwt.dll
+/home/capo/my_directory/programming/diplom/backend/backendtest/bin/Debug/net8.0/linux-x64/backendtest.staticwebassets.endpoints.json
+/home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/staticwebassets.build.endpoints.json
+/home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/staticwebassets/msbuild.backendtest.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+/home/capo/my_directory/programming/diplom/backend/backendtest/obj/Debug/net8.0/linux-x64/backendt.810E763B.Up2Date
