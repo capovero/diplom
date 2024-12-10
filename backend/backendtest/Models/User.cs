@@ -22,6 +22,12 @@ public class User
     public string Email { get; set; } = string.Empty; 
     public string PasswordHash { get; set; } = string.Empty; 
     public string Role { get; set; } = "User"; 
+    
+    public ICollection<Project> Projects { get; set; } = new List<Project>();
+    public ICollection<Donation> Donations { get; set; } = new List<Donation>();
+
+    // Один пользователь может создать много проектов.
+    //Один пользователь может поддерживать много проектов.
 
     public static (User? User, string error) Create(Guid id, string userName, string email, string password)
     {

@@ -1,5 +1,6 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace backendtest;
@@ -28,7 +29,12 @@ public static class ApiExtensions
                     }
                 };
             });
-        services.AddAuthorization();
+        services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminPolicy", policy => 
+                    policy.RequireClaim("Admin", "true"));
+                
+            });
     }
     
 }

@@ -1,3 +1,4 @@
+using backendtest.Configurations;
 using backendtest.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,4 +10,20 @@ public class ApplicationContext : DbContext
     {
     }
     public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Update> Updates { get; set; }
+    public DbSet<Project> Projects { get; set; }
+    public DbSet<Media> Medias { get; set; }
+    public DbSet<Donation> Donations { get; set; }
+    public DbSet<Category> Categories { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new UpdateConfiguration());
+        modelBuilder.ApplyConfiguration(new ProjectConfiguration());
+        modelBuilder.ApplyConfiguration(new MediaConfiguration());
+        modelBuilder.ApplyConfiguration(new DonationConfiguration());
+        modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+        base.OnModelCreating(modelBuilder);
+    }
 }
