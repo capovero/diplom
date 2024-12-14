@@ -31,9 +31,13 @@ public static class ApiExtensions
             });
         services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminPolicy", policy => 
-                    policy.RequireClaim("Admin", "true"));
-                
+                // Политика для администраторов
+                options.AddPolicy("AdminPolicy", policy =>
+                    policy.RequireRole("Admin")); 
+
+                // Политика для зарегистрированных пользователей
+                options.AddPolicy("UserPolicy", policy =>
+                    policy.RequireRole("User", "Admin")); // Админы тоже могут пользоваться функционалом пользователейс
             });
     }
     
