@@ -12,7 +12,7 @@ using backendtest.Data;
 namespace backendtest.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241210153749_UpdateConfiguration")]
+    [Migration("20241214132459_UpdateConfiguration")]
     partial class UpdateConfiguration
     {
         /// <inheritdoc />
@@ -106,9 +106,6 @@ namespace backendtest.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("CategoryId1")
-                        .HasColumnType("integer");
-
                     b.Property<decimal>("CollectedAmount")
                         .HasColumnType("decimal(18,2)");
 
@@ -140,8 +137,6 @@ namespace backendtest.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CategoryId1");
 
                     b.HasIndex("UserId");
 
@@ -234,14 +229,10 @@ namespace backendtest.Migrations
             modelBuilder.Entity("backendtest.Models.Project", b =>
                 {
                     b.HasOne("backendtest.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Projects")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("backendtest.Models.Category", null)
-                        .WithMany("Projects")
-                        .HasForeignKey("CategoryId1");
 
                     b.HasOne("backendtest.Models.User", "User")
                         .WithMany("Projects")

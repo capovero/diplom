@@ -48,8 +48,7 @@ namespace backendtest.Migrations
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    CategoryId1 = table.Column<int>(type: "integer", nullable: true)
+                    CategoryId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,11 +59,6 @@ namespace backendtest.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Projects_Categories_CategoryId1",
-                        column: x => x.CategoryId1,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Projects_Users_UserId",
                         column: x => x.UserId,
@@ -161,11 +155,6 @@ namespace backendtest.Migrations
                 name: "IX_Projects_CategoryId",
                 table: "Projects",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Projects_CategoryId1",
-                table: "Projects",
-                column: "CategoryId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_UserId",

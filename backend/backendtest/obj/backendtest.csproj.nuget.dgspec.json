@@ -13,7 +13,6 @@
         "packagesPath": "/home/capo/.nuget/packages/",
         "outputPath": "/home/capo/my_directory/programming/diplom/backend/backendtest/obj/",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/home/capo/.nuget/NuGet/NuGet.Config"
         ],
@@ -39,7 +38,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "all"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {

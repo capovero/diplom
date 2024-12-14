@@ -37,7 +37,7 @@ public static class ApiExtensions
 
                 // Политика для зарегистрированных пользователей
                 options.AddPolicy("UserPolicy", policy =>
-                    policy.RequireRole("User", "Admin")); // Админы тоже могут пользоваться функционалом пользователейс
+                    policy.RequireRole("User", "Admin")); // Админы тоже могут пользоваться функционалом пользователей
             });
     }
     
