@@ -5,6 +5,7 @@ using backendtest.HashPassword;
 using backendtest.Interfaces;
 using backendtest.Mappers;
 using backendtest.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +14,13 @@ namespace backendtest.Repository
     public class UserRepository : IUserRepository
     {
         private readonly ApplicationContext _context;
+        
+        private readonly IPasswordHasher _passwordHasher;
 
-        public UserRepository(ApplicationContext context)
+        public UserRepository(ApplicationContext context, IPasswordHasher passwordHasher)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
         }
 
         public Task<List<User>> GetAllAsync()
@@ -37,12 +41,17 @@ namespace backendtest.Repository
 
         public async Task<bool> RegisterAsync(CreateUserDto createUserDto)
         {
+            var exists = await _context.Users.AnyAsync(u => u.Email == createUserDto.Email || u.UserName == createUserDto.UserName);
+            if (exists)
+            {
+                return false; // Email или имя пользователя уже заняты
+            }
             var newUser = new User
             {
                 Id = Guid.NewGuid(),
                 UserName = createUserDto.UserName,
                 Email = createUserDto.Email,
-                PasswordHash = PasswordHelper.HashPassword(createUserDto.Password)
+                PasswordHash = _passwordHasher.Generate(createUserDto.Password)
             };
             await _context.Users.AddAsync(newUser);
             await _context.SaveChangesAsync();
@@ -63,9 +72,13 @@ namespace backendtest.Repository
             return true;
         }
 
-        public async Task<User?> LoginAsync(string UserName)
+        public async Task<User?> GetByName(string userName)
         {
-            return await _context.Users.FirstOrDefaultAsync(x => x.UserName == UserName);
+            var userEntity = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName)
+                ?? throw new Exception("User not found");
+            return (userEntity);
         }
+
+        
     }
 }

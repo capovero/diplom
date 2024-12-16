@@ -23,7 +23,8 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Project>
         // Связь с категорией
         builder.HasOne<Category>(p => p.Category)
             .WithMany(c => c.Projects) // Привязываем к коллекции Projects в категории
-            .HasForeignKey(p => p.CategoryId);
+            .HasForeignKey(p => p.CategoryId)
+            .IsRequired(false);
 
         // Связь с обновлениями
         builder.HasMany<Update>(p => p.Updates)

@@ -8,3 +8,8 @@ public enum Status // - `Status` (enum) — статус проекта (Pending
     Active,
     Completed
 }
+//Ожидается,
+// Одобрено,
+// Отклонено,
+// Активно,
+// Завершено

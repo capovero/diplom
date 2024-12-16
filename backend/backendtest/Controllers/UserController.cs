@@ -4,6 +4,8 @@ using backendtest.HashPassword;
 using backendtest.Interfaces;
 using backendtest.Mappers;
 using backendtest.Models;
+using backendtest.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,12 +16,13 @@ public class UserController : ControllerBase
 {
     private readonly ApplicationContext _context;
     private readonly IUserRepository _userRepo;
-    private readonly IAuthInterface _auth;
-    public UserController(ApplicationContext context, IUserRepository userRepo, IAuthInterface auth)
+    private readonly IUserService _userService;
+    private readonly HttpContext _httpContext;
+    public UserController(ApplicationContext context, IUserRepository userRepo, IUserService userService)
     { 
         _userRepo = userRepo;
         _context = context;   
-        _auth = auth;
+        _userService = userService;
     }
 
     [HttpGet]
@@ -60,10 +63,10 @@ public class UserController : ControllerBase
     {
         return BadRequest("Некорректные данные.");
     }
-    var resault = await _userRepo.RegisterAsync(createUserDto);
-    if (!resault)
+    var answer = await _userRepo.RegisterAsync(createUserDto);
+    if (!answer)
     {
-        return NotFound();
+        return BadRequest("Не удалось зарегистрировать пользователя.");
     }
     return Ok("Пользователь успешно зарегистрирован!");
     }
@@ -78,24 +81,19 @@ public class UserController : ControllerBase
         }
         return Ok();
     }
-
+    
     [HttpPost("login")]
-    public async Task<IActionResult> LoginAsync(LoginUserDto loginUserDto)
+    public async Task<IActionResult> LoginAsync([FromBody] LoginUserDto loginUserDto)
     {
-        var user = await _userRepo.LoginAsync(loginUserDto.UserName);
-        if (user == null)
+        if (!ModelState.IsValid)
         {
-            return Unauthorized();
+            return BadRequest("Некорректные данные.");
         }
-
-        if (!BCrypt.Net.BCrypt.Verify(loginUserDto.Password, user.PasswordHash))
-        {
-            return Unauthorized();
-        }
-
-        var token = _auth.GenerateToken(user.Id, user.Role);
-        HttpContext.Response.Cookies.Append("cookies", token);
-        return Ok();
+    
+        
+       
+        var token = await _userService.LoginWithGetToken(loginUserDto.UserName, loginUserDto.Password);
+            HttpContext.Response.Cookies.Append("token", token);
+            return Ok(new { Token = token });
     }
-
 }

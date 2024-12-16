@@ -13,21 +13,21 @@ public class Project
     public decimal GoalAmount { get; set; } // Цель сбора средств.
 
     [Column(TypeName = "decimal(18,2)")]
-    public decimal CollectedAmount { get; set; } // Сумма собранных средств.
+    public decimal CollectedAmount { get; set; } = 0; // Сумма собранных средств.
     
-    public DateTime CreatedAt { get; set; } // Дата создания.
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;// Дата создания.
     public DateTime UpdatedAt { get; set; } // Дата обновления.
     
     // Хранение статуса как перечисления
-    public Status Status { get; set; } // Использование enum
+    public Status Status { get; set; } = Status.Pending; // Использование enum
     
     // Внешний ключ и связь с пользователем
     public Guid UserId { get; set; }
     public User User { get; set; }
     
     // Внешний ключ и связь с категорией
-    public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    public int? CategoryId { get; set; }
+    public Category? Category { get; set; }
     
     // Проект может иметь много обновлений
     public ICollection<Update> Updates { get; set; } = new List<Update>();

@@ -6,8 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 namespace backendtest;
 
 public static class ApiExtensions
-{
-    public static void AddApiAuthentication(this IServiceCollection services, IConfiguration configuration)
+{ 
+    public static void AddApiAuthentication(this IServiceCollection services, IOptions<JwtOptions> jwtOptions)
     {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -18,27 +18,18 @@ public static class ApiExtensions
                     ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("JWT:Secret")))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Value.SecretKey))
                 };
                 options.Events = new JwtBearerEvents
                 {
                     OnMessageReceived = context =>
                     {
-                        context.Token = context.Request.Cookies["cookies"];
+                        context.Token = context.Request.Cookies["token"];
                         return Task.CompletedTask;
+                        
                     }
                 };
             });
-        services.AddAuthorization(options =>
-            {
-                // Политика для администраторов
-                options.AddPolicy("AdminPolicy", policy =>
-                    policy.RequireRole("Admin")); 
-
-                // Политика для зарегистрированных пользователей
-                options.AddPolicy("UserPolicy", policy =>
-                    policy.RequireRole("User", "Admin")); // Админы тоже могут пользоваться функционалом пользователей
-            });
+        services.AddAuthorization();
     }
-    
 }
