@@ -7,7 +7,7 @@ namespace backendtest;
 
 public static class ApiExtensions
 { 
-    public static void AddApiAuthentication(this IServiceCollection services, IOptions<JwtOptions> jwtOptions)
+    public static void AddApiAuthentication(this IServiceCollection services, JwtOptions jwtOptions)
     {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -18,7 +18,7 @@ public static class ApiExtensions
                     ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Value.SecretKey))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey))
                 };
                 options.Events = new JwtBearerEvents
                 {
@@ -26,10 +26,27 @@ public static class ApiExtensions
                     {
                         context.Token = context.Request.Cookies["token"];
                         return Task.CompletedTask;
-                        
                     }
                 };
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        Console.WriteLine("All cookies:");
+                        foreach (var cookie in context.Request.Cookies)
+                        {
+                            Console.WriteLine($"{cookie.Key}: {cookie.Value}");
+                        }
+
+                        context.Token = context.Request.Cookies["token"];
+                        Console.WriteLine($"Extracted token: {context.Token}");
+
+                        return Task.CompletedTask;
+                    }
+                };
+
             });
         services.AddAuthorization();
     }
+
 }

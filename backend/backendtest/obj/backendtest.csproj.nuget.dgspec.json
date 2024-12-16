@@ -51,7 +51,7 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -77,9 +77,13 @@
               "target": "Package",
               "version": "[9.0.0-rc.2.24474.1, )"
             },
+            "Microsoft.IdentityModel.JsonWebTokens": {
+              "target": "Package",
+              "version": "[6.35.0, )"
+            },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
-              "version": "[8.3.0, )"
+              "version": "[6.35.0, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
@@ -88,6 +92,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.35.0, )"
             }
           },
           "imports": [

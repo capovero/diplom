@@ -96,4 +96,22 @@ public class UserController : ControllerBase
             HttpContext.Response.Cookies.Append("token", token);
             return Ok(new { Token = token });
     }
+    [HttpGet("test-endpoint")]
+    [Authorize]
+    public IActionResult TestEndpoint()
+    {
+        return Ok(new { Message = "You are authorized!" });
+    }
+    [HttpGet("debug-token")]
+    public IActionResult DebugToken()
+    {
+        var token = Request.Cookies["token"];
+        if (string.IsNullOrEmpty(token))
+        {
+            return BadRequest("Token not found in cookies.");
+        }
+
+        return Ok(new { token });
+    }
+
 }
