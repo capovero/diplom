@@ -81,12 +81,24 @@ public class ProjectRepository : IProjectRepository
     {
         return await _context.Projects.Where(p => p.Status == Status.Active).ToListAsync();
     }
-    public async Task<List<Project>> GetUserProjectsByStatusAsync(Guid userId, Status status)
+    public async Task<List<ProjectResponseDto>> GetUserProjectsByStatusAsync(string userId, Status status)
     {
+        var guidUserId = Guid.Parse(userId);
+
         return await _context.Projects
-            .Where(p => p.UserId == userId && p.Status == status).Include(p => p.MediaFiles)
+            .Where(p => p.UserId == guidUserId && p.Status == status)
+            .Select(p => new ProjectResponseDto
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Description = p.Description,
+                GoalAmount = p.GoalAmount,
+                CreatedAt = p.CreatedAt,
+                MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
+            })
             .ToListAsync();
     }
+
     
     
     // МЕТОДЫ ДЛЯ АДМИНА

@@ -12,7 +12,7 @@ public interface IProjectRepository
     // Task<List<Project>> GetProjectsAsyncForAdmin();
     // Task<List<Project>> GetProjectsAsyncForAdminAll();
     Task<List<Project>> GetProjectsAsyncForUser();
-    Task<List<Project>> GetUserProjectsByStatusAsync(Guid userId, Status newstatus);
+    Task<List<ProjectResponseDto>> GetUserProjectsByStatusAsync(string userId, Status status);
     
     
     Task<List<Project>> GetProjectsAsyncForAdminPending();

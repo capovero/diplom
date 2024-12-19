@@ -63,7 +63,6 @@ public class ProjectController : ControllerBase
         var projects = await _projectRepository.GetProjectsByIdAsync(userId);
         return Ok(projects); 
     }
-    // [Authorize(Policy = "AdminPolicy")]
 
     [HttpGet("all-active-projects")]
     public async Task<IActionResult> GetAllActiveProjects()
@@ -71,5 +70,18 @@ public class ProjectController : ControllerBase
         var resault = await _projectRepository.GetProjectsAsyncForUser();
         return Ok(resault);
     }
-     
+
+    [Authorize(Policy = "UserPolicy")]
+    [HttpGet("personal-projects-by-status")]
+    public async Task<IActionResult> GetAllProjectsByStatus([FromQuery] Status status)
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        
+        var resault = await _projectRepository.GetUserProjectsByStatusAsync(userId, status);
+        return Ok(resault);
+    }
+    
+    // МЕТОДЫ ДЛЯ АДМИНА
+    // [Authorize(Policy = "AdminPolicy")]
+
 }
