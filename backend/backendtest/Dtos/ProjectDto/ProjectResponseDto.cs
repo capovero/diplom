@@ -1,0 +1,11 @@
+namespace backendtest.Dtos.ProjectDto;
+
+public class ProjectResponseDto
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public decimal GoalAmount { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public List<string> MediaFiles { get; set; }
+}

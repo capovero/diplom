@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/903c9f33-8716-4c3a-9f53-e420617dfcaa_copper_mountain.jpg",
+      "PackagePath": "staticwebassets/uploads/903c9f33-8716-4c3a-9f53-e420617dfcaa_copper_mountain.jpg"
+    },
+    {
+      "Id": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/df9005ac-3050-4100-9c3a-746089e3b3ab_copper_mountain.jpg",
+      "PackagePath": "staticwebassets/uploads/df9005ac-3050-4100-9c3a-746089e3b3ab_copper_mountain.jpg"
+    },
+    {
+      "Id": "obj/Debug/net8.0/linux-x64/staticwebassets/msbuild.backendtest.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/linux-x64/staticwebassets/msbuild.backendtest.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/linux-x64/staticwebassets/msbuild.build.backendtest.props",
+      "PackagePath": "build\\backendtest.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/linux-x64/staticwebassets/msbuild.buildMultiTargeting.backendtest.props",
+      "PackagePath": "buildMultiTargeting\\backendtest.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/linux-x64/staticwebassets/msbuild.buildTransitive.backendtest.props",
+      "PackagePath": "buildTransitive\\backendtest.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

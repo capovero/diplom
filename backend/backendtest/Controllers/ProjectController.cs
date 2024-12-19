@@ -22,7 +22,7 @@ public class ProjectController : ControllerBase
     }
     
      
-    [Authorize]
+    [Authorize(Policy = "UserPolicy")]
     [HttpPost("create")]
     public async Task<ActionResult<Project>> Post(CreateProjectDto dto)
     {
@@ -34,9 +34,21 @@ public class ProjectController : ControllerBase
             return Unauthorized("Пользователь не аутентифицирован.");
         }
 
-        var project = await _projectRepository.CreateProjectAsync(dto, userId);
+        var isTesting = false;//флаг для тестирования
+        
+        var project = await _projectRepository.CreateProjectAsync(dto, userId, isTesting);
 
-        return Ok(project);
+        var response = new ProjectResponseDto
+        {
+            Id = project.Id,
+            Title = project.Title,
+            Description = project.Description,
+            GoalAmount = project.GoalAmount,
+            CreatedAt = project.CreatedAt,
+            MediaFiles = project.MediaFiles.Select(m => m.FilePath).ToList()
+        };
+
+        return Ok(response);
     }
     
     
@@ -52,5 +64,6 @@ public class ProjectController : ControllerBase
         var projects = await _projectRepository.GetProjectsByIdAsync(userId);
         return Ok(projects); 
     }
-
+    // [Authorize(Policy = "AdminPolicy")]
+     
 }

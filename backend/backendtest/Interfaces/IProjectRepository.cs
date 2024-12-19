@@ -5,7 +5,8 @@ namespace backendtest.Interfaces;
 
 public interface IProjectRepository
 {
-    Task<Project> CreateProjectAsync(CreateProjectDto createProjectDto, string userId); // +
+    Task<Project> CreateProjectAsync(CreateProjectDto createProjectDto, string userId, bool isTesting); // +
+    
     Task<List<Project>> GetProjectsByIdAsync(string userId);
     
     // Task<List<Project>> GetProjectsAsyncForAdmin();
