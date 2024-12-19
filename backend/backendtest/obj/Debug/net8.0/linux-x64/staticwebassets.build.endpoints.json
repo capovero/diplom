@@ -85,6 +85,88 @@
       ]
     },
     {
+      "Route": "uploads/b4c3dacc-d595-44a8-95ef-6217c65672a2_copper_mountain.ej875ksbfj.jpg",
+      "AssetFile": "uploads/b4c3dacc-d595-44a8-95ef-6217c65672a2_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 19 Dec 2024 18:26:05 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej875ksbfj"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/b4c3dacc-d595-44a8-95ef-6217c65672a2_copper_mountain.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/b4c3dacc-d595-44a8-95ef-6217c65672a2_copper_mountain.jpg",
+      "AssetFile": "uploads/b4c3dacc-d595-44a8-95ef-6217c65672a2_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 19 Dec 2024 18:26:05 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
       "Route": "uploads/df9005ac-3050-4100-9c3a-746089e3b3ab_copper_mountain.ej875ksbfj.jpg",
       "AssetFile": "uploads/df9005ac-3050-4100-9c3a-746089e3b3ab_copper_mountain.jpg",
       "Selectors": [],

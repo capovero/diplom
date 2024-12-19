@@ -34,8 +34,9 @@ public class ProjectRepository : IProjectRepository
         };
         await _context.Projects.AddAsync(project);
         await _context.SaveChangesAsync();
-        // Сохраняем медиафайлы, если не тестируем
-        if (!isTesting)
+        
+        if (!isTesting)// Сохраняем медиафайлы, если не тестируем
+
         {
             await SaveProjectMediaFiles(dto.MediaFiles, project.Id);
         }
@@ -70,20 +71,20 @@ public class ProjectRepository : IProjectRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<Project>> GetProjectsByIdAsync(string userId)
+    public async Task<List<Project>> GetProjectsByIdAsync(string userId)//юзер получает только свои проекты
     {
         var guidUserId = Guid.Parse(userId);
         var projects = _context.Projects.Where(p => p.UserId == guidUserId);
         return await projects.ToListAsync();
     }
-    public async Task<List<Project>> GetProjectsAsyncForUser()//метод для юзера
+    public async Task<List<Project>> GetProjectsAsyncForUser()//получение всех проектов для любой степени авторизации(юзер/аноним)
     {
         return await _context.Projects.Where(p => p.Status == Status.Active).ToListAsync();
     }
     public async Task<List<Project>> GetUserProjectsByStatusAsync(Guid userId, Status status)
     {
         return await _context.Projects
-            .Where(p => p.UserId == userId && p.Status == status)
+            .Where(p => p.UserId == userId && p.Status == status).Include(p => p.MediaFiles)
             .ToListAsync();
     }
     
@@ -91,7 +92,7 @@ public class ProjectRepository : IProjectRepository
     // МЕТОДЫ ДЛЯ АДМИНА
     public async Task<List<Project>> GetProjectsAsyncForAdminPending()//метод для админа
     {
-        return await _context.Projects.Where(p => p.Status==Status.Pending).Include(p => p.MediaFiles) .ToListAsync();
+        return await _context.Projects.Where(p => p.Status==Status.Pending).Include(p => p.MediaFiles).ToListAsync();
     }
 
     public async Task<bool> UpdateStatusProjectsForAdmin(int id, Status newstatus)//метод для админа по обновлению статуса

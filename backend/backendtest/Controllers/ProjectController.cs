@@ -51,9 +51,8 @@ public class ProjectController : ControllerBase
         return Ok(response);
     }
     
-    
+    [Authorize(Policy = "UserPolicy")]
     [HttpGet("personal-projects")]
-    [Authorize]
     public async Task<IActionResult> GetUserProjects()
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -65,5 +64,12 @@ public class ProjectController : ControllerBase
         return Ok(projects); 
     }
     // [Authorize(Policy = "AdminPolicy")]
+
+    [HttpGet("all-active-projects")]
+    public async Task<IActionResult> GetAllActiveProjects()
+    {
+        var resault = await _projectRepository.GetProjectsAsyncForUser();
+        return Ok(resault);
+    }
      
 }

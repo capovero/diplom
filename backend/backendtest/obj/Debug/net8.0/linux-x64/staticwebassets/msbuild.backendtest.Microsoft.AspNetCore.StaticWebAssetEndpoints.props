@@ -12,6 +12,18 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-\u002BpunCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"2590635"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022\u002BpunCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\u0022"},{"Name":"Last-Modified","Value":"Thu, 19 Dec 2024 18:11:18 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/backendtest/uploads/b4c3dacc-d595-44a8-95ef-6217c65672a2_copper_mountain.ej875ksbfj.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\b4c3dacc-d595-44a8-95ef-6217c65672a2_copper_mountain.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"ej875ksbfj"},{"Name":"integrity","Value":"sha256-\u002BpunCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="},{"Name":"label","Value":"_content/backendtest/uploads/b4c3dacc-d595-44a8-95ef-6217c65672a2_copper_mountain.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2590635"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022\u002BpunCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\u0022"},{"Name":"Last-Modified","Value":"Thu, 19 Dec 2024 18:26:05 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/backendtest/uploads/b4c3dacc-d595-44a8-95ef-6217c65672a2_copper_mountain.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\b4c3dacc-d595-44a8-95ef-6217c65672a2_copper_mountain.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-\u002BpunCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"2590635"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022\u002BpunCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\u0022"},{"Name":"Last-Modified","Value":"Thu, 19 Dec 2024 18:26:05 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/backendtest/uploads/df9005ac-3050-4100-9c3a-746089e3b3ab_copper_mountain.ej875ksbfj.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\df9005ac-3050-4100-9c3a-746089e3b3ab_copper_mountain.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
