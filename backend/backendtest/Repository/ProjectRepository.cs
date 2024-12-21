@@ -121,18 +121,16 @@ public class ProjectRepository : IProjectRepository
             .ToListAsync();
     }
 
-    public async Task<bool> UpdateStatusProjectsForAdmin(int id, Status newstatus)//метод для админа по обновлению статуса
+    public async Task<Project> UpdateStatusProjectsForAdmin(int id, Status newstatus)//метод для админа по обновлению статуса
     {
         var project = await _context.Projects.FindAsync(id);
         if (project == null)
-        {
-            return false;
-        }
-        project.Status = newstatus; 
+            return null;
+        project.Status = newstatus;  
         project.UpdatedAt = DateTime.UtcNow;
         _context.Projects.Update(project);
         await _context.SaveChangesAsync();
-        return true;
+        return project;
     }
     
 

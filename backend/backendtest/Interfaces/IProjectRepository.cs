@@ -16,7 +16,7 @@ public interface IProjectRepository
     
     
     Task<List<ProjectResponseDto>> GetProjectsAsyncForAdminPending();
-    Task<bool> UpdateStatusProjectsForAdmin(int id, Status status);
+    Task<Project> UpdateStatusProjectsForAdmin(int id, Status status);
 
 
 }

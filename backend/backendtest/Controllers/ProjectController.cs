@@ -91,4 +91,12 @@ public class ProjectController : ControllerBase
         return Ok(pendingProjects);
     }
 
+    [Authorize(Policy = "AdminPolicy")]
+    [HttpPut("admin-update-status")]
+    public async Task<IActionResult> UpdateStatus(int id, Status status)
+    {
+        var result = await _projectRepository.UpdateStatusProjectsForAdmin(id, status);
+        return Ok(result);
+    }
+
 }
