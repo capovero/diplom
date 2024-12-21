@@ -7,7 +7,7 @@ public interface IProjectRepository
 {
     Task<Project> CreateProjectAsync(CreateProjectDto createProjectDto, string userId, bool isTesting); // +
     
-    Task<List<Project>> GetProjectsByIdAsync(string userId);
+    Task<List<Project>> GetProjectsByIdAsync(string userId); // +
     
     // Task<List<Project>> GetProjectsAsyncForAdmin();
     // Task<List<Project>> GetProjectsAsyncForAdminAll();
@@ -15,7 +15,7 @@ public interface IProjectRepository
     Task<List<ProjectResponseDto>> GetUserProjectsByStatusAsync(string userId, Status status);
     
     
-    Task<List<Project>> GetProjectsAsyncForAdminPending();
+    Task<List<ProjectResponseDto>> GetProjectsAsyncForAdminPending();
     Task<bool> UpdateStatusProjectsForAdmin(int id, Status status);
 
 

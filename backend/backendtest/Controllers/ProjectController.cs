@@ -23,7 +23,7 @@ public class ProjectController : ControllerBase
     
      
     [Authorize(Policy = "UserPolicy")]
-    [HttpPost("create")]
+    [HttpPost("create")]  // создание проекта
     public async Task<ActionResult<Project>> Post(CreateProjectDto dto)
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -52,7 +52,7 @@ public class ProjectController : ControllerBase
     }
     
     [Authorize(Policy = "UserPolicy")]
-    [HttpGet("personal-projects")]
+    [HttpGet("personal-projects")] //получение проектов конкретного юзера
     public async Task<IActionResult> GetUserProjects()
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -64,7 +64,7 @@ public class ProjectController : ControllerBase
         return Ok(projects); 
     }
 
-    [HttpGet("all-active-projects")]
+    [HttpGet("all-active-projects")] //метод без авторизации для получения всех проектов
     public async Task<IActionResult> GetAllActiveProjects()
     {
         var resault = await _projectRepository.GetProjectsAsyncForUser();
@@ -72,7 +72,7 @@ public class ProjectController : ControllerBase
     }
 
     [Authorize(Policy = "UserPolicy")]
-    [HttpGet("personal-projects-by-status")]
+    [HttpGet("personal-projects-by-status")] // персональный метод для просмотра своих проектов с любым статусом
     public async Task<IActionResult> GetAllProjectsByStatus([FromQuery] Status status)
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -83,5 +83,12 @@ public class ProjectController : ControllerBase
     
     // МЕТОДЫ ДЛЯ АДМИНА
     // [Authorize(Policy = "AdminPolicy")]
+    [Authorize(Policy = "AdminPolicy")]
+    [HttpGet("admin-get-pending-projects")]
+    public async Task<IActionResult> GetAllPendingProjects()
+    {
+        var pendingProjects = await _projectRepository.GetProjectsAsyncForAdminPending();
+        return Ok(pendingProjects);
+    }
 
 }

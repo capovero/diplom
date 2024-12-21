@@ -19,7 +19,7 @@ public class ProjectRepository : IProjectRepository
         _context = context;
 
     }
-    public async Task<Project> CreateProjectAsync(CreateProjectDto dto, string userId, bool isTesting)
+    public async Task<Project> CreateProjectAsync(CreateProjectDto dto, string userId, bool isTesting) //создание
     {
         var guidUserId = Guid.Parse(userId);
         
@@ -43,7 +43,7 @@ public class ProjectRepository : IProjectRepository
         return project;
     }
 
-    private async Task SaveProjectMediaFiles(List<IFormFile> mediaFiles, int projectId)
+    private async Task SaveProjectMediaFiles(List<IFormFile> mediaFiles, int projectId) //часть с медиа для создания
     {
         var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
         if (!Directory.Exists(uploadsFolder))
@@ -81,7 +81,7 @@ public class ProjectRepository : IProjectRepository
     {
         return await _context.Projects.Where(p => p.Status == Status.Active).ToListAsync();
     }
-    public async Task<List<ProjectResponseDto>> GetUserProjectsByStatusAsync(string userId, Status status)
+    public async Task<List<ProjectResponseDto>> GetUserProjectsByStatusAsync(string userId, Status status) //персональное получение проекта по определнному статусу
     {
         var guidUserId = Guid.Parse(userId);
 
@@ -92,6 +92,8 @@ public class ProjectRepository : IProjectRepository
                 Id = p.Id,
                 Title = p.Title,
                 Description = p.Description,
+                status = p.Status,
+                CategoryId = p.CategoryId,
                 GoalAmount = p.GoalAmount,
                 CreatedAt = p.CreatedAt,
                 MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
@@ -102,9 +104,21 @@ public class ProjectRepository : IProjectRepository
     
     
     // МЕТОДЫ ДЛЯ АДМИНА
-    public async Task<List<Project>> GetProjectsAsyncForAdminPending()//метод для админа
+    public async Task<List<ProjectResponseDto>> GetProjectsAsyncForAdminPending()//метод для админа
     {
-        return await _context.Projects.Where(p => p.Status==Status.Pending).Include(p => p.MediaFiles).ToListAsync();
+        return await _context.Projects.Where(p => p.Status==Status.Pending)
+            .Select(p => new ProjectResponseDto
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Description = p.Description,
+                status = p.Status,
+                CategoryId = p.CategoryId,
+                GoalAmount = p.GoalAmount,
+                CreatedAt = p.CreatedAt,
+                MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
+            })
+            .ToListAsync();
     }
 
     public async Task<bool> UpdateStatusProjectsForAdmin(int id, Status newstatus)//метод для админа по обновлению статуса

@@ -1,3 +1,5 @@
+using backendtest.Models;
+
 namespace backendtest.Dtos.ProjectDto;
 
 public class ProjectResponseDto
@@ -7,5 +9,9 @@ public class ProjectResponseDto
     public string Description { get; set; }
     public decimal GoalAmount { get; set; }
     public DateTime CreatedAt { get; set; }
+    
+    public Status status { get; set; }
+    
+    public int? CategoryId { get; set; }
     public List<string> MediaFiles { get; set; }
 }
