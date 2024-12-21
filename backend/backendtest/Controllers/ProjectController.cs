@@ -21,7 +21,13 @@ public class ProjectController : ControllerBase
         _context = context;
     }
     
-     
+    [HttpGet("all-active-projects")] //метод без авторизации для получения всех проектов
+    public async Task<IActionResult> GetAllActiveProjects()
+    {
+        var resault = await _projectRepository.GetProjectsAsyncForUser();
+        return Ok(resault);
+    }
+    
     [Authorize(Policy = "UserPolicy")]
     [HttpPost("create")]  // создание проекта
     public async Task<ActionResult<Project>> Post(CreateProjectDto dto)
@@ -64,13 +70,6 @@ public class ProjectController : ControllerBase
         return Ok(projects); 
     }
 
-    [HttpGet("all-active-projects")] //метод без авторизации для получения всех проектов
-    public async Task<IActionResult> GetAllActiveProjects()
-    {
-        var resault = await _projectRepository.GetProjectsAsyncForUser();
-        return Ok(resault);
-    }
-
     [Authorize(Policy = "UserPolicy")]
     [HttpGet("personal-projects-by-status")] // персональный метод для просмотра своих проектов с любым статусом
     public async Task<IActionResult> GetAllProjectsByStatus([FromQuery] Status status)
@@ -80,6 +79,23 @@ public class ProjectController : ControllerBase
         var resault = await _projectRepository.GetUserProjectsByStatusAsync(userId, status);
         return Ok(resault);
     }
+
+    [Authorize(Policy = "UserPolicy")]
+    [HttpGet("user-projects-search")]
+    public async Task<IActionResult> GetSearchProjectsByStatusOrTitle([FromQuery] string? title, [FromQuery] int? categoryId)
+    {
+        try
+        {
+            var searchProject = await _projectRepository.UserSearch(title, categoryId);
+            return Ok(searchProject);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"{e.Message}");
+        }
+        
+    }
+    
     
     // МЕТОДЫ ДЛЯ АДМИНА
     // [Authorize(Policy = "AdminPolicy")]
@@ -97,6 +113,22 @@ public class ProjectController : ControllerBase
     {
         var result = await _projectRepository.UpdateStatusProjectsForAdmin(id, status);
         return Ok(result);
+    }
+    
+    [Authorize(Policy = "AdminPolicy")]
+    [HttpGet("admin-projects-search")]
+    public async Task<IActionResult> GetSearchProjectsByStatusOrTitleForAdmin([FromQuery] string? title, [FromQuery] int? categoryId)
+    {
+        try
+        {
+            var searchProject = await _projectRepository.AdminSearch(title, categoryId);
+            return Ok(searchProject);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"{e.Message}");
+        }
+        
     }
 
 }

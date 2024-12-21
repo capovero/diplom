@@ -101,6 +101,32 @@ public class ProjectRepository : IProjectRepository
             .ToListAsync();
     }
 
+    public async Task<List<ProjectResponseDto>> UserSearch(string title, int? categoryId=null)
+    {
+        var query = _context.Projects.Where(p => p.Status == Status.Active);
+        if (!string.IsNullOrWhiteSpace(title))
+        {
+            query = query.Where(p => p.Title.Contains(title));
+        }
+
+        if (categoryId.HasValue)
+        {
+            query = query.Where(p => p.CategoryId == categoryId);
+        }
+
+        return await query.Select(p => new ProjectResponseDto
+        {
+            Id = p.Id,
+            Title = p.Title,
+            Description = p.Description,
+            status = p.Status,
+            CategoryId = p.CategoryId,
+            GoalAmount = p.GoalAmount,
+            CreatedAt = p.CreatedAt,
+            MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
+        }).ToListAsync();
+    }
+
     
     
     // МЕТОДЫ ДЛЯ АДМИНА
@@ -132,6 +158,35 @@ public class ProjectRepository : IProjectRepository
         await _context.SaveChangesAsync();
         return project;
     }
+    public async Task<List<ProjectResponseDto>> AdminSearch(string title, int? categoryId = null) //админский поиск
+    {
+        var query = _context.Projects.AsQueryable(); // Все статусы
+
+        if (!string.IsNullOrWhiteSpace(title))
+        {
+            query = query.Where(p => p.Title.Contains(title));
+        }
+
+        if (categoryId.HasValue)
+        {
+            query = query.Where(p => p.CategoryId == categoryId.Value);
+        }
+
+        return await query
+            .Select(p => new ProjectResponseDto
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Description = p.Description,
+                status = p.Status,
+                CategoryId = p.CategoryId,
+                GoalAmount = p.GoalAmount,
+                CreatedAt = p.CreatedAt,
+                MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
+            })
+            .ToListAsync();
+    }
+
     
 
 }
