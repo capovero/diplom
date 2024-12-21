@@ -96,12 +96,7 @@ public class UserController : ControllerBase
             HttpContext.Response.Cookies.Append("token", token);
             return Ok(new { Token = token });
     }
-    [HttpGet("test-endpoint")]
-    [Authorize]
-    public IActionResult TestEndpoint()
-    {
-        return Ok(new { Message = "You are authorized!" });
-    }
+  
     [HttpGet("debug-token")]
     public IActionResult DebugToken()
     {

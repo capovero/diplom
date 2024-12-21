@@ -69,18 +69,7 @@ public class ProjectController : ControllerBase
         var projects = await _projectRepository.GetProjectsByIdAsync(userId);
         return Ok(projects); 
     }
-
-    [Authorize(Policy = "UserPolicy")]
-    [HttpGet("personal-projects-by-status")] // персональный метод для просмотра своих проектов с любым статусом
-    public async Task<IActionResult> GetAllProjectsByStatus([FromQuery] Status status)
-    {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        
-        var resault = await _projectRepository.GetUserProjectsByStatusAsync(userId, status);
-        return Ok(resault);
-    }
-
-    [Authorize(Policy = "UserPolicy")]
+    
     [HttpGet("user-projects-search")]
     public async Task<IActionResult> GetSearchProjectsByStatusOrTitle([FromQuery] string? title, [FromQuery] int? categoryId)
     {
@@ -93,19 +82,20 @@ public class ProjectController : ControllerBase
         {
             return StatusCode(500, $"{e.Message}");
         }
-        
     }
+
+    [Authorize(Policy = "UserPolicy")]
+    [HttpDelete("delete")]
+    public async Task<bool> DeleteProject(int projectId)
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        return await _projectRepository.DeleteProjectByIdAsync(projectId, userId);
+    }
+
     
     
     // МЕТОДЫ ДЛЯ АДМИНА
     // [Authorize(Policy = "AdminPolicy")]
-    [Authorize(Policy = "AdminPolicy")]
-    [HttpGet("admin-get-pending-projects")]
-    public async Task<IActionResult> GetAllPendingProjects()
-    {
-        var pendingProjects = await _projectRepository.GetProjectsAsyncForAdminPending();
-        return Ok(pendingProjects);
-    }
 
     [Authorize(Policy = "AdminPolicy")]
     [HttpPut("admin-update-status")]
@@ -128,7 +118,13 @@ public class ProjectController : ControllerBase
         {
             return StatusCode(500, $"{e.Message}");
         }
-        
+    }
+
+    [Authorize(Policy = "AdminPolicy")]
+    [HttpDelete("Admin-delete-project")]
+    public async Task<bool> DeleteProjectAdmin(int projectId)
+    {        
+        return await _projectRepository.AdminDelete(projectId);
     }
 
 }

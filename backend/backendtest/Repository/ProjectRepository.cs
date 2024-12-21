@@ -81,25 +81,6 @@ public class ProjectRepository : IProjectRepository
     {
         return await _context.Projects.Where(p => p.Status == Status.Active).ToListAsync();
     }
-    public async Task<List<ProjectResponseDto>> GetUserProjectsByStatusAsync(string userId, Status status) //персональное получение проекта по определнному статусу
-    {
-        var guidUserId = Guid.Parse(userId);
-
-        return await _context.Projects
-            .Where(p => p.UserId == guidUserId && p.Status == status)
-            .Select(p => new ProjectResponseDto
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Description = p.Description,
-                status = p.Status,
-                CategoryId = p.CategoryId,
-                GoalAmount = p.GoalAmount,
-                CreatedAt = p.CreatedAt,
-                MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
-            })
-            .ToListAsync();
-    }
 
     public async Task<List<ProjectResponseDto>> UserSearch(string title, int? categoryId=null)
     {
@@ -126,26 +107,22 @@ public class ProjectRepository : IProjectRepository
             MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
         }).ToListAsync();
     }
+    public async Task<bool> DeleteProjectByIdAsync(int projectId, string userId)
+    {
+        var guidUserId = Guid.Parse(userId);
+        var project = await _context.Projects
+            .FirstOrDefaultAsync(p => p.Id == projectId && p.UserId == guidUserId);
+        if (project == null)
+        {
+            return false;
+        }
+        _context.Projects.Remove(project);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 
     
-    
     // МЕТОДЫ ДЛЯ АДМИНА
-    public async Task<List<ProjectResponseDto>> GetProjectsAsyncForAdminPending()//метод для админа
-    {
-        return await _context.Projects.Where(p => p.Status==Status.Pending)
-            .Select(p => new ProjectResponseDto
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Description = p.Description,
-                status = p.Status,
-                CategoryId = p.CategoryId,
-                GoalAmount = p.GoalAmount,
-                CreatedAt = p.CreatedAt,
-                MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
-            })
-            .ToListAsync();
-    }
 
     public async Task<Project> UpdateStatusProjectsForAdmin(int id, Status newstatus)//метод для админа по обновлению статуса
     {
@@ -185,6 +162,18 @@ public class ProjectRepository : IProjectRepository
                 MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
             })
             .ToListAsync();
+    }
+
+    public async Task<bool> AdminDelete(int projectId)
+    {
+        var project = await _context.Projects.Where(p => p.Id == projectId).FirstOrDefaultAsync();
+        if (project == null)
+        {
+            return false;
+        }
+        _context.Projects.Remove(project);
+        await _context.SaveChangesAsync();
+        return true;
     }
 
     
