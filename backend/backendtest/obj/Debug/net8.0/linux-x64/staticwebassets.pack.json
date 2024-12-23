@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets/uploads/df9005ac-3050-4100-9c3a-746089e3b3ab_copper_mountain.jpg"
     },
     {
+      "Id": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/f8ed6fd7-ac6e-4f96-8c9d-eecd5e5675ea_copper_mountain.jpg",
+      "PackagePath": "staticwebassets/uploads/f8ed6fd7-ac6e-4f96-8c9d-eecd5e5675ea_copper_mountain.jpg"
+    },
+    {
       "Id": "obj/Debug/net8.0/linux-x64/staticwebassets/msbuild.backendtest.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },

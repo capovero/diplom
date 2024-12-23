@@ -7,9 +7,12 @@ namespace backendtest.Interfaces;
 public interface IUserRepository
 {
     Task<List<User>> GetAllAsync();
-    Task<bool> DeleteAsync(Guid id);
+    Task<bool> DeleteAsync(string userId);
 
     Task<bool> RegisterAsync(CreateUserDto createUserDto);
     Task<bool> UpdateAsync(Guid id, UpdateUserDto updateUserDto); // Метод принимает ID и данные для обновления
     Task<User?> GetByName(string userName);
+    
+    // админские
+  Task<bool> DeleteAdmin(Guid userId);
 }

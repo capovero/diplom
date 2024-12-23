@@ -24,8 +24,8 @@ public class ProjectController : ControllerBase
     [HttpGet("all-active-projects")] //метод без авторизации для получения всех проектов
     public async Task<IActionResult> GetAllActiveProjects()
     {
-        var resault = await _projectRepository.GetProjectsAsyncForUser();
-        return Ok(resault);
+        var result = await _projectRepository.GetProjectsAsyncForUser();
+        return Ok(result);
     }
     
     [Authorize(Policy = "UserPolicy")]

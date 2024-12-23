@@ -27,16 +27,15 @@ namespace backendtest.Repository
         {
             return _context.Users.ToListAsync();
         }
-        public async Task<bool> DeleteAsync(Guid id)
+      
+        public async Task<bool> DeleteAsync(string userId)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
+            var guidId = Guid.Parse(userId);
+            var user = await _context.Users.FindAsync(guidId);
+            if(user == null)
                 return false;
-            }
             _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return true;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> RegisterAsync(CreateUserDto createUserDto)
@@ -78,7 +77,15 @@ namespace backendtest.Repository
                 ?? throw new Exception("User not found");
             return (userEntity);
         }
-
+        //АДМИНСКИЕ МЕТОДЫ 
+        public async Task<bool> DeleteAdmin(Guid userId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if(user == null)
+                return false;
+            _context.Users.Remove(user);
+            return await _context.SaveChangesAsync() > 0;
+        }
         
     }
 }

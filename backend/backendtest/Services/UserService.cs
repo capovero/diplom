@@ -23,8 +23,8 @@ public class UserService : IUserService
     public async Task<string> LoginWithGetToken(string userName, string password)
     {
         var user = await _userRepository.GetByName(userName);
-        var resault = _passwordHasher.Verify(password, user.PasswordHash);
-        if (resault == false)
+        var result = _passwordHasher.Verify(password, user.PasswordHash);
+        if (result == false)
         {
             throw new Exception("Invalid username or password");
         }

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using backendtest.Data;
 using backendtest.Dtos.UserDto;
 using backendtest.HashPassword;
@@ -24,7 +25,8 @@ public class UserController : ControllerBase
         _context = context;   
         _userService = userService;
     }
-
+    
+    [Authorize("AdminPolicy")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -43,17 +45,15 @@ public class UserController : ControllerBase
         }
         return Ok(user.ToUserDto());
     }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    
+    [Authorize("UserPolicy")]
+    [HttpDelete("DeleteUser")]
+    public async Task<IActionResult> Delete()
     {
-        var result = await _userRepo.DeleteAsync(id);
-        if(!result)
-        {
-            return NotFound();
-        }
-        return Ok();
-        
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var result = await _userRepo.DeleteAsync(userId);
+        Response.Cookies.Delete("token");
+        return Ok(result);
     }
     
     [HttpPost("register")]
@@ -108,5 +108,15 @@ public class UserController : ControllerBase
 
         return Ok(new { token });
     }
-
+    
+    //АДМИНСКИЕ МЕТОДЫ
+    [Authorize("AdminPolicy")]
+    [HttpDelete("Admin-delete-user")]
+    public async Task<IActionResult> AdminDelete(Guid userId)
+    {
+        var result = await _userRepo.DeleteAdmin(userId);
+        if (!result)
+            return BadRequest("user not found");
+        return Ok(result); 
+    }
 }
