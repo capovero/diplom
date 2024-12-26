@@ -1,5 +1,88 @@
 {
   "Version": 1,
   "ManifestType": "Build",
-  "Endpoints": []
+  "Endpoints": [
+    {
+      "Route": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.ej875ksbfj.jpg",
+      "AssetFile": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Dec 2024 16:57:38 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej875ksbfj"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg",
+      "AssetFile": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Dec 2024 16:57:38 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    }
+  ]
 }

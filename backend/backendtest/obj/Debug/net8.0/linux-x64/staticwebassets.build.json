@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JqawYX/IVPFesiuL3JV36S05HceUZTmEG6NCJOfBr/0=",
+  "Hash": "95hysBR/jX6mPnw31jgMN5LQOgP3jBC2Igtl0oi+6B0=",
   "Source": "backendtest",
   "BasePath": "_content/backendtest",
   "Mode": "Default",
@@ -15,6 +15,111 @@
       "Pattern": "**"
     }
   ],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": [
+    {
+      "Identity": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg",
+      "SourceId": "backendtest",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/",
+      "BasePath": "_content/backendtest",
+      "RelativePath": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ej875ksbfj",
+      "Integrity": "+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.ej875ksbfj.jpg",
+      "AssetFile": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Dec 2024 16:57:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej875ksbfj"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg",
+      "AssetFile": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Dec 2024 16:57:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    }
+  ]
 }

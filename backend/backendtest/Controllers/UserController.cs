@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using backendtest.Data;
+using backendtest.Dtos.ProjectDto;
 using backendtest.Dtos.UserDto;
 using backendtest.HashPassword;
 using backendtest.Interfaces;
@@ -26,7 +27,7 @@ public class UserController : ControllerBase
         _userService = userService;
     }
     
-    [Authorize("AdminPolicy")]
+    [Authorize("UserPolicy")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -36,15 +37,16 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task <IActionResult> GetById([FromRoute] Guid id)
+    [Authorize("UserPolicy")]
+    public async Task<IActionResult> GetUserProfile([FromRoute] Guid id)
     {
-        var user = await _context.Users.FindAsync(id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-        return Ok(user.ToUserDto());
+        var userProfile = await _userRepo.GetUserProfileAsync(id);
+        if (userProfile == null)
+            return NotFound(new { Message = "User not found." });
+        return Ok(userProfile);
     }
+
+
     
     [Authorize("UserPolicy")]
     [HttpDelete("DeleteUser")]
@@ -119,4 +121,14 @@ public class UserController : ControllerBase
             return BadRequest("user not found");
         return Ok(result); 
     }
+    [Authorize("AdminPolicy")]
+    [HttpGet("GetUserProfileForAdmin/{id}")]
+    public async Task<IActionResult> GetUserProfileForAdmin([FromRoute] Guid id)
+    {
+        var userProfile = await _userRepo.GetUserProfileForAdminAsync(id);
+        if (userProfile == null)
+            return NotFound(new { Message = "User not found." });
+        return Ok(userProfile);
+    }
+
 }

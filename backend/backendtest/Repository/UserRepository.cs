@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using backendtest.Data;
+using backendtest.Dtos.ProjectDto;
 using backendtest.Dtos.UserDto;
 using backendtest.HashPassword;
 using backendtest.Interfaces;
@@ -27,7 +28,40 @@ namespace backendtest.Repository
         {
             return _context.Users.ToListAsync();
         }
-      
+        public async Task<UserProfileDto> GetUserProfileAsync(Guid userId)
+        {
+            var user = await _context.Users
+                .Include(u => u.Projects)
+                .ThenInclude(p => p.MediaFiles)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+                return null;
+
+            var userProjects = user.Projects 
+                .Where(p => p.Status == Status.Active)
+                .Select(p => new ProjectResponseDto
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    Description = p.Description,
+                    GoalAmount = p.GoalAmount,
+                    CreatedAt = p.CreatedAt,
+                    MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
+                })
+                .ToList();
+
+            return new UserProfileDto
+            {
+                Id = user.Id,
+                Name = user.UserName,
+                Email = user.Email,
+                Projects = userProjects
+            };
+        }
+
+
+        
         public async Task<bool> DeleteAsync(string userId)
         {
             var guidId = Guid.Parse(userId);
@@ -87,5 +121,38 @@ namespace backendtest.Repository
             return await _context.SaveChangesAsync() > 0;
         }
         
+        public async Task<UserProfileDto> GetUserProfileForAdminAsync(Guid userId)
+        {
+            var user = await _context.Users
+                .IgnoreQueryFilters() // Учитывает глобальные фильтры
+                .Include(u => u.Projects)
+                .ThenInclude(p => p.MediaFiles)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+                return null;
+
+            var userProjects = user.Projects
+                .Select(p => new ProjectResponseDto
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    Description = p.Description,
+                    GoalAmount = p.GoalAmount,
+                    CreatedAt = p.CreatedAt,
+                    MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
+                })
+                .ToList();
+
+            return new UserProfileDto
+            {
+                Id = user.Id,
+                Name = user.UserName,
+                Email = user.Email,
+                Projects = userProjects
+            };
+
+        }
+
     }
 }
