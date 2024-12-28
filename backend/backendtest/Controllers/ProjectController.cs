@@ -22,9 +22,9 @@ public class ProjectController : ControllerBase
     }
     
     [HttpGet("all-active-projects")] //метод без авторизации для получения всех проектов
-    public async Task<IActionResult> GetAllActiveProjects()
+    public async Task<IActionResult> GetAllActiveProjects([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var result = await _projectRepository.GetProjectsAsyncForUser();
+        var result = await _projectRepository.GetProjectsAsyncForUser(pageNumber, pageSize);
         return Ok(result);
     }
     
@@ -71,11 +71,15 @@ public class ProjectController : ControllerBase
     }
     
     [HttpGet("user-projects-search")]
-    public async Task<IActionResult> GetSearchProjectsByStatusOrTitle([FromQuery] string? title, [FromQuery] int? categoryId)
+    public async Task<IActionResult> GetSearchProjectsByStatusOrTitle(
+        [FromQuery] string? title,
+        [FromQuery] int? categoryId,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10)
     {
         try
         {
-            var searchProject = await _projectRepository.UserSearch(title, categoryId);
+            var searchProject = await _projectRepository.UserSearch(title, categoryId, pageNumber, pageSize);
             return Ok(searchProject);
         }
         catch (Exception e)
@@ -107,11 +111,15 @@ public class ProjectController : ControllerBase
     
     [Authorize(Policy = "AdminPolicy")]
     [HttpGet("admin-projects-search")]
-    public async Task<IActionResult> GetSearchProjectsByStatusOrTitleForAdmin([FromQuery] string? title, [FromQuery] int? categoryId)
+    public async Task<IActionResult> GetSearchProjectsByStatusOrTitleForAdmin( 
+        [FromQuery] string? title,
+        [FromQuery] int? categoryId,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10)
     {
         try
         {
-            var searchProject = await _projectRepository.AdminSearch(title, categoryId);
+            var searchProject = await _projectRepository.AdminSearch(title, categoryId, pageNumber, pageSize);
             return Ok(searchProject);
         }
         catch (Exception e)

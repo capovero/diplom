@@ -77,12 +77,33 @@ public class ProjectRepository : IProjectRepository
         var projects = _context.Projects.Where(p => p.UserId == guidUserId);
         return await projects.ToListAsync();
     }
-    public async Task<List<Project>> GetProjectsAsyncForUser()//получение всех проектов для любой степени авторизации(юзер/аноним)
+    public async Task<ProjectPaginationDto<ProjectResponseDto>> GetProjectsAsyncForUser(int pageNumber, int pageSize)//получение всех проектов для любой степени авторизации(юзер/аноним)
     {
-        return await _context.Projects.Where(p => p.Status == Status.Active).ToListAsync();
+        var query = _context.Projects.Where(p => p.Status == Status.Active);
+        var totalRecords = await query.CountAsync();
+        var projects = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(p => new ProjectResponseDto
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Description = p.Description,
+                GoalAmount = p.GoalAmount,
+                CreatedAt = p.CreatedAt,
+                CategoryId = p.CategoryId,
+                MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
+            }).ToListAsync();
+        return new ProjectPaginationDto<ProjectResponseDto>
+        {
+            CurrentPage = pageNumber,
+            PageSize = pageSize,
+            TotalRecords = totalRecords,
+            Data = projects
+        };
     }
 
-    public async Task<List<ProjectResponseDto>> UserSearch(string title, int? categoryId=null)
+    public async Task<ProjectPaginationDto<ProjectResponseDto>> UserSearch(string title, int? categoryId,  int pageNumber, int pageSize)
     {
         var query = _context.Projects.Where(p => p.Status == Status.Active);
         if (!string.IsNullOrWhiteSpace(title))
@@ -94,18 +115,32 @@ public class ProjectRepository : IProjectRepository
         {
             query = query.Where(p => p.CategoryId == categoryId);
         }
+        
+        var totalRecords = await query.CountAsync();
+        
+        var projects = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(p => new ProjectResponseDto
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Description = p.Description,
+                GoalAmount = p.GoalAmount,
+                CreatedAt = p.CreatedAt,
+                status = p.Status,
+                CategoryId = p.CategoryId,
+                MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
+            })
+            .ToListAsync();
 
-        return await query.Select(p => new ProjectResponseDto
+        return new ProjectPaginationDto<ProjectResponseDto>
         {
-            Id = p.Id,
-            Title = p.Title,
-            Description = p.Description,
-            status = p.Status,
-            CategoryId = p.CategoryId,
-            GoalAmount = p.GoalAmount,
-            CreatedAt = p.CreatedAt,
-            MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
-        }).ToListAsync();
+            CurrentPage = pageNumber,
+            PageSize = pageSize,
+            TotalRecords = totalRecords,
+            Data = projects
+        };
     }
     public async Task<bool> DeleteProjectByIdAsync(int projectId, string userId)
     {
@@ -135,7 +170,7 @@ public class ProjectRepository : IProjectRepository
         await _context.SaveChangesAsync();
         return project;
     }
-    public async Task<List<ProjectResponseDto>> AdminSearch(string title, int? categoryId = null) //админский поиск
+    public async Task<ProjectPaginationDto<ProjectResponseDto>> AdminSearch(string title, int? categoryId, int pageNumber, int pageSize) //админский поиск
     {
         var query = _context.Projects.AsQueryable(); // Все статусы
 
@@ -148,20 +183,31 @@ public class ProjectRepository : IProjectRepository
         {
             query = query.Where(p => p.CategoryId == categoryId.Value);
         }
-
-        return await query
+        
+        var totalRecords = await query.CountAsync();
+        var projects = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .Select(p => new ProjectResponseDto
             {
                 Id = p.Id,
                 Title = p.Title,
                 Description = p.Description,
-                status = p.Status,
-                CategoryId = p.CategoryId,
                 GoalAmount = p.GoalAmount,
                 CreatedAt = p.CreatedAt,
+                status = p.Status,
+                CategoryId = p.CategoryId,
                 MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
             })
             .ToListAsync();
+
+        return new ProjectPaginationDto<ProjectResponseDto>
+        {
+            CurrentPage = pageNumber,
+            PageSize = pageSize,
+            TotalRecords = totalRecords,
+            Data = projects
+        };
     }
 
     public async Task<bool> AdminDelete(int projectId)
