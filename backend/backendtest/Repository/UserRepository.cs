@@ -6,6 +6,7 @@ using backendtest.HashPassword;
 using backendtest.Interfaces;
 using backendtest.Mappers;
 using backendtest.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -91,18 +92,20 @@ namespace backendtest.Repository
             return true;
         }
 
-        public async Task<bool> UpdateAsync(Guid id, UpdateUserDto updateUserDto)
+        public async Task<User> UpdateAsync(string userId, UpdateUserDto updateUserDto)
         {
-         var user = await _context.Users.FindAsync(id);
-         if (user == null)
-         {
-             return false;
-         }
+            var idGuid = Guid.Parse(userId);
+            var user = await _context.Users.FindAsync(idGuid);
+         
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
 
-         user.ToUpdateUserDto(updateUserDto);         
-         _context.Entry(user).State = EntityState.Modified;
+            user.ToUpdateUserDto(updateUserDto);         
+            _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return true;
+            return user;
         }
 
         public async Task<User?> GetByName(string userName)

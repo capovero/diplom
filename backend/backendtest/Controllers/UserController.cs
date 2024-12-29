@@ -73,14 +73,12 @@ public class UserController : ControllerBase
     return Ok("Пользователь успешно зарегистрирован!");
     }
 
+    [Authorize("UserPolicy")]
     [HttpPut("id")]
-    public async Task<IActionResult> Update(Guid id, UpdateUserDto updateUserDto)
+    public async Task<IActionResult> Update(UpdateUserDto updateUserDto)
     {
-        var result = await _userRepo.UpdateAsync(id, updateUserDto);
-        if (!result)
-        {
-            return NotFound();
-        }
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var result = await _userRepo.UpdateAsync(userId, updateUserDto);
         return Ok();
     }
     
@@ -91,24 +89,10 @@ public class UserController : ControllerBase
         {
             return BadRequest("Некорректные данные.");
         }
-    
         
-       
         var token = await _userService.LoginWithGetToken(loginUserDto.UserName, loginUserDto.Password);
             HttpContext.Response.Cookies.Append("token", token);
             return Ok(new { Token = token });
-    }
-  
-    [HttpGet("debug-token")]
-    public IActionResult DebugToken()
-    {
-        var token = Request.Cookies["token"];
-        if (string.IsNullOrEmpty(token))
-        {
-            return BadRequest("Token not found in cookies.");
-        }
-
-        return Ok(new { token });
     }
     
     //АДМИНСКИЕ МЕТОДЫ

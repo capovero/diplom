@@ -10,7 +10,7 @@ public interface IUserRepository
     Task<UserProfileDto> GetUserProfileAsync(Guid userId);
     Task<bool> DeleteAsync(string userId);
     Task<bool> RegisterAsync(CreateUserDto createUserDto);
-    Task<bool> UpdateAsync(Guid id, UpdateUserDto updateUserDto); // Метод принимает ID и данные для обновления
+    Task<User> UpdateAsync(string userId, UpdateUserDto updateUserDto); // Метод принимает ID и данные для обновления
     Task<User?> GetByName(string userName);
     
     // админские
