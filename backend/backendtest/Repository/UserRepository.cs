@@ -39,26 +39,7 @@ namespace backendtest.Repository
             if (user == null)
                 return null;
 
-            var userProjects = user.Projects 
-                .Where(p => p.Status == Status.Active)
-                .Select(p => new ProjectResponseDto
-                {
-                    Id = p.Id,
-                    Title = p.Title,
-                    Description = p.Description,
-                    GoalAmount = p.GoalAmount,
-                    CreatedAt = p.CreatedAt,
-                    MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
-                })
-                .ToList();
-
-            return new UserProfileDto
-            {
-                Id = user.Id,
-                Name = user.UserName,
-                Email = user.Email,
-                Projects = userProjects
-            };
+            return user.ToUserProfileDto();
         }
 
 
@@ -134,26 +115,7 @@ namespace backendtest.Repository
 
             if (user == null)
                 return null;
-
-            var userProjects = user.Projects
-                .Select(p => new ProjectResponseDto
-                {
-                    Id = p.Id,
-                    Title = p.Title,
-                    Description = p.Description,
-                    GoalAmount = p.GoalAmount,
-                    CreatedAt = p.CreatedAt,
-                    MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
-                })
-                .ToList();
-
-            return new UserProfileDto
-            {
-                Id = user.Id,
-                Name = user.UserName,
-                Email = user.Email,
-                Projects = userProjects
-            };
+            return user.AdminToUserProfileDto();
 
         }
 

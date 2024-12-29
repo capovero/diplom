@@ -2,6 +2,7 @@ using System.Security.Claims;
 using backendtest.Data;
 using backendtest.Dtos.ProjectDto;
 using backendtest.Interfaces;
+using backendtest.Mappers;
 using backendtest.Models;
 using backendtest.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -84,16 +85,7 @@ public class ProjectRepository : IProjectRepository
         var projects = await query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
-            .Select(p => new ProjectResponseDto
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Description = p.Description,
-                GoalAmount = p.GoalAmount,
-                CreatedAt = p.CreatedAt,
-                CategoryId = p.CategoryId,
-                MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
-            }).ToListAsync();
+            .ToResponseDtoList().ToListAsync();
         return new ProjectPaginationDto<ProjectResponseDto>
         {
             CurrentPage = pageNumber,
@@ -188,17 +180,7 @@ public class ProjectRepository : IProjectRepository
         var projects = await query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
-            .Select(p => new ProjectResponseDto
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Description = p.Description,
-                GoalAmount = p.GoalAmount,
-                CreatedAt = p.CreatedAt,
-                status = p.Status,
-                CategoryId = p.CategoryId,
-                MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
-            })
+            .ToResponseDtoList()
             .ToListAsync();
 
         return new ProjectPaginationDto<ProjectResponseDto>
