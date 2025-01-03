@@ -17,7 +17,7 @@ public class CreateProjectDto
     [Range(1, double.MaxValue, ErrorMessage = "GoalAmount must be greater than 0.")]
     public decimal GoalAmount { get; set; }
     
-    public int? CategoryId { get; set; }
+    public int CategoryId { get; set; }
     
     [Required]
     public List<IFormFile> MediaFiles { get; set; } = new();

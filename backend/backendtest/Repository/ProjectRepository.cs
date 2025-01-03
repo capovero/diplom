@@ -31,6 +31,7 @@ public class ProjectRepository : IProjectRepository
             GoalAmount = dto.GoalAmount,
             CreatedAt = DateTime.UtcNow,
             Status = Status.Pending,
+            CategoryId = dto.CategoryId,
             UserId = guidUserId
         };
         await _context.Projects.AddAsync(project);

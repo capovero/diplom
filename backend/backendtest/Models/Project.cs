@@ -27,7 +27,7 @@ public class Project
     
     // Внешний ключ и связь с категорией
     public int? CategoryId { get; set; }
-    public Category? Category { get; set; }
+    public Category Category { get; set; }
     
     // Проект может иметь много обновлений
     public ICollection<Update> Updates { get; set; } = new List<Update>();

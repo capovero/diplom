@@ -3,6 +3,252 @@
   "ManifestType": "Build",
   "Endpoints": [
     {
+      "Route": "uploads/070089a1-9379-4156-b478-404bfa3a8f47_copper_mountain.ej875ksbfj.jpg",
+      "AssetFile": "uploads/070089a1-9379-4156-b478-404bfa3a8f47_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 03 Jan 2025 20:58:13 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej875ksbfj"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/070089a1-9379-4156-b478-404bfa3a8f47_copper_mountain.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/070089a1-9379-4156-b478-404bfa3a8f47_copper_mountain.jpg",
+      "AssetFile": "uploads/070089a1-9379-4156-b478-404bfa3a8f47_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 03 Jan 2025 20:58:13 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/47790eb8-bf05-41ad-91d5-73c18e309cf3_copper_mountain.ej875ksbfj.jpg",
+      "AssetFile": "uploads/47790eb8-bf05-41ad-91d5-73c18e309cf3_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 03 Jan 2025 21:41:22 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej875ksbfj"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/47790eb8-bf05-41ad-91d5-73c18e309cf3_copper_mountain.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/47790eb8-bf05-41ad-91d5-73c18e309cf3_copper_mountain.jpg",
+      "AssetFile": "uploads/47790eb8-bf05-41ad-91d5-73c18e309cf3_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 03 Jan 2025 21:41:22 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/a41daf7d-4588-4cc9-9329-143cb4f1e790_copper_mountain.ej875ksbfj.jpg",
+      "AssetFile": "uploads/a41daf7d-4588-4cc9-9329-143cb4f1e790_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 03 Jan 2025 20:38:01 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej875ksbfj"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/a41daf7d-4588-4cc9-9329-143cb4f1e790_copper_mountain.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/a41daf7d-4588-4cc9-9329-143cb4f1e790_copper_mountain.jpg",
+      "AssetFile": "uploads/a41daf7d-4588-4cc9-9329-143cb4f1e790_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 03 Jan 2025 20:38:01 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
       "Route": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.ej875ksbfj.jpg",
       "AssetFile": "uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg",
       "Selectors": [],
@@ -75,6 +321,88 @@
         {
           "Name": "Last-Modified",
           "Value": "Thu, 26 Dec 2024 16:57:38 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/f1b7c7cf-acdd-4ca9-b131-935cb5d2d456_copper_mountain.ej875ksbfj.jpg",
+      "AssetFile": "uploads/f1b7c7cf-acdd-4ca9-b131-935cb5d2d456_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 03 Jan 2025 21:57:09 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej875ksbfj"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/f1b7c7cf-acdd-4ca9-b131-935cb5d2d456_copper_mountain.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/f1b7c7cf-acdd-4ca9-b131-935cb5d2d456_copper_mountain.jpg",
+      "AssetFile": "uploads/f1b7c7cf-acdd-4ca9-b131-935cb5d2d456_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 03 Jan 2025 21:57:09 GMT"
         }
       ],
       "EndpointProperties": [

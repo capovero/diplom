@@ -51,6 +51,7 @@ public class ProjectController : ControllerBase
             Description = project.Description,
             GoalAmount = project.GoalAmount,
             CreatedAt = project.CreatedAt,
+            CategoryId = project.CategoryId,
             MediaFiles = project.MediaFiles.Select(m => m.FilePath).ToList()
         };
 
