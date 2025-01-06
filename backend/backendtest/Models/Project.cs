@@ -38,5 +38,9 @@ public class Project
     // Проект может иметь много пожертвований
     public ICollection<Donation> Donations { get; set; } = new List<Donation>();
     
+    public float AverageRating { get; set; } = 0; // Новая колонка
+
+    public ICollection<Review> Reviews { get; set; } = new List<Review>();
+    
 }
 

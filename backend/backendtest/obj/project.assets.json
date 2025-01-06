@@ -5601,7 +5601,6 @@
       "packagesPath": "/home/capo/.nuget/packages/",
       "outputPath": "/home/capo/my_directory/programming/diplom/backend/backendtest/obj/",
       "projectStyle": "PackageReference",
-      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
         "/home/capo/.nuget/NuGet/NuGet.Config"
       ],
@@ -5627,7 +5626,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "all"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -5733,7 +5733,7 @@
       "code": "NU1903",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'System.Private.Uri' 4.3.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-5f2m-466j-3848",
+      "message": "У пакета \"System.Private.Uri\" 4.3.0 есть известная уязвимость https://github.com/advisories/GHSA-5f2m-466j-3848 (уровень серьезности: высокий уровень)",
       "libraryId": "System.Private.Uri",
       "targetGraphs": [
         "net8.0/linux-x64"
@@ -5743,7 +5743,7 @@
       "code": "NU1902",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'System.Private.Uri' 4.3.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-x5qj-9vmx-7g6g",
+      "message": "У пакета \"System.Private.Uri\" 4.3.0 есть известная уязвимость https://github.com/advisories/GHSA-x5qj-9vmx-7g6g (уровень серьезности: средний уровень)",
       "libraryId": "System.Private.Uri",
       "targetGraphs": [
         "net8.0/linux-x64"
@@ -5753,7 +5753,7 @@
       "code": "NU1903",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'System.Private.Uri' 4.3.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-xhfc-gr8f-ffwc",
+      "message": "У пакета \"System.Private.Uri\" 4.3.0 есть известная уязвимость https://github.com/advisories/GHSA-xhfc-gr8f-ffwc (уровень серьезности: высокий уровень)",
       "libraryId": "System.Private.Uri",
       "targetGraphs": [
         "net8.0/linux-x64"
