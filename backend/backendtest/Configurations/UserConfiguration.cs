@@ -28,5 +28,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasMany<Donation>(u => u.Donations)
             .WithOne(d => d.User)
             .HasForeignKey(d => d.UserId);
+        
+        builder.HasMany(u => u.Reviews) // Один пользователь может иметь много отзывов
+            .WithOne(r => r.User)       // Каждый отзыв принадлежит одному пользователю
+            .HasForeignKey(r => r.UserId) // Связь по внешнему ключу UserId
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

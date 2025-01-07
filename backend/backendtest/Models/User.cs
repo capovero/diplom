@@ -25,6 +25,8 @@ public class User
     
     public ICollection<Project> Projects { get; set; } = new List<Project>();
     public ICollection<Donation> Donations { get; set; } = new List<Donation>();
+    
+    public ICollection<Review> Reviews { get; set; } = new List<Review>(); 
 
     // Один пользователь может создать много проектов.
     //Один пользователь может поддерживать много проектов.
