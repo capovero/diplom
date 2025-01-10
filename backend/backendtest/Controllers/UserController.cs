@@ -16,14 +16,13 @@ namespace backendtest.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly ApplicationContext _context;
+    
     private readonly IUserRepository _userRepo;
     private readonly IUserService _userService;
     private readonly HttpContext _httpContext;
-    public UserController(ApplicationContext context, IUserRepository userRepo, IUserService userService)
+    public UserController( IUserRepository userRepo, IUserService userService)
     { 
         _userRepo = userRepo;
-        _context = context;   
         _userService = userService;
     }
     
