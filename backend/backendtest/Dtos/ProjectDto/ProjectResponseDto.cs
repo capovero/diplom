@@ -13,5 +13,6 @@ public class ProjectResponseDto
     public Status status { get; set; }
     
     public int? CategoryId { get; set; }
+    public float AverageRating { get; set; } 
     public List<string> MediaFiles { get; set; }
 }

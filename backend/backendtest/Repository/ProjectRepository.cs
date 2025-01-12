@@ -123,6 +123,7 @@ public class ProjectRepository : IProjectRepository
                 CreatedAt = p.CreatedAt,
                 status = p.Status,
                 CategoryId = p.CategoryId,
+                AverageRating = p.AverageRating,
                 MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
             })
             .ToListAsync();

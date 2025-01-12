@@ -17,6 +17,7 @@ namespace backendtest.Mappers
                 CreatedAt = project.CreatedAt,
                 CategoryId = project.CategoryId,
                 status = project.Status,
+                AverageRating = project.AverageRating,
                 MediaFiles = project.MediaFiles.Select(m => m.FilePath).ToList()
             };
         }
@@ -31,6 +32,7 @@ namespace backendtest.Mappers
                 CreatedAt = p.CreatedAt,
                 CategoryId = p.CategoryId,
                 status = p.Status,
+                AverageRating = p.AverageRating,
                 MediaFiles = p.MediaFiles.Select(m => m.FilePath).ToList()
             });
         }
