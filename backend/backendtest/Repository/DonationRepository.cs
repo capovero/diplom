@@ -1,5 +1,7 @@
 using backendtest.Data;
+using backendtest.Dtos;
 using backendtest.Interfaces;
+using backendtest.Models;
 
 namespace backendtest.Repository;
 
@@ -11,4 +13,50 @@ public class DonationRepository : IDonationRepository
     {
         _context = context;
     }
+
+    public async Task<DonationResponceDto> CreateDonation(int projectId, string userId, decimal amount)
+    {
+        var guidUserId = Guid.Parse(userId);
+        var user = await _context.Users.FindAsync(guidUserId);
+        if (user == null)
+            return null;
+        var project = await _context.Projects.FindAsync(projectId);
+        if (project == null)
+            return null;
+        
+        project.CollectedAmount += amount;
+        project.UpdatedAt = DateTime.UtcNow;
+        
+        var donation = new Donation
+        {
+            Amount = amount,
+            DonateAt = DateTime.UtcNow,
+            ProjectId = projectId,
+            UserId = guidUserId
+        };
+            await _context.Donations.AddAsync(donation);
+            await _context.SaveChangesAsync();
+            await CheckAndUpdateStatus(donation.ProjectId);
+            return new DonationResponceDto
+            {
+                Amount = donation.Amount,
+                DonateAt = donation.DonateAt,
+                UserName = user.UserName,
+                ProjectName = project.Title
+            };
+    }
+
+    public async Task CheckAndUpdateStatus(int projectId)
+    {
+        var project = await _context.Projects.FindAsync(projectId);
+        if(project == null)
+            return;
+        if (project.CollectedAmount >= project.GoalAmount && project.Status != Status.Completed)
+        {
+            project.Status = Status.Completed;
+            project.UpdatedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+        }
+    }
 }
+

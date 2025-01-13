@@ -29,6 +29,7 @@ public class ProjectRepository : IProjectRepository
             Title = dto.Title,
             Description = dto.Description,
             GoalAmount = dto.GoalAmount,
+            CollectedAmount = 0,
             CreatedAt = DateTime.UtcNow,
             Status = Status.Pending,
             CategoryId = dto.CategoryId,
@@ -98,7 +99,7 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<ProjectPaginationDto<ProjectResponseDto>> UserSearch(string title, int? categoryId,  int pageNumber, int pageSize)
     {
-        var query = _context.Projects.Where(p => p.Status == Status.Active);
+        var query = _context.Projects.Where(p => p.Status == Status.Active || p.Status == Status.Completed );
         if (!string.IsNullOrWhiteSpace(title))
         {
             query = query.Where(p => p.Title.Contains(title));
@@ -120,6 +121,7 @@ public class ProjectRepository : IProjectRepository
                 Title = p.Title,
                 Description = p.Description,
                 GoalAmount = p.GoalAmount,
+                CollectedAmount = p.CollectedAmount,
                 CreatedAt = p.CreatedAt,
                 status = p.Status,
                 CategoryId = p.CategoryId,

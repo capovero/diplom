@@ -1,4 +1,7 @@
+using System.Security.Claims;
 using backendtest.Interfaces;
+using backendtest.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backendtest.Controllers;
@@ -13,5 +16,15 @@ public class DonationController : ControllerBase
     {
         _donationRepository = donationRepository;
     }
-    
+
+    [HttpPost("create-donate")]
+    [Authorize("UserPolicy")]
+    public async Task<IActionResult> CreateDonation(int projectId, decimal amount)
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+            return Unauthorized();
+        var donation = await _donationRepository.CreateDonation(projectId, userId, amount);
+        return Ok(donation);
+    }
 }
