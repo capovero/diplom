@@ -36,6 +36,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\47790eb8-bf05-41ad-91d5-73c18e309cf3_copper_mountain.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>backendtest</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/backendtest</BasePath>
+      <RelativePath>uploads/82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>ej875ksbfj</Fingerprint>
+      <Integrity>+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\a41daf7d-4588-4cc9-9329-143cb4f1e790_copper_mountain.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>backendtest</SourceId>

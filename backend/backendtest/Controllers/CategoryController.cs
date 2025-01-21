@@ -27,7 +27,7 @@ public class CategoryController : ControllerBase
         return Ok(newCategory);
     }
 
-    [Authorize(Policy = "AdminPolicy")]
+    [Authorize(Policy = "UserPolicy")]
     [HttpGet("getAll")]
     public async Task<IActionResult> GetAllCategories()
     {

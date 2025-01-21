@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FgHJgXcON1o8EPx3QxGVNGlRKbwyaaRMz2PLMWCSUkA=",
+  "Hash": "LymKAazd8MPu77vMQOj2Ws7j8VIw57qfCI2MAUoDcqo=",
   "Source": "backendtest",
   "BasePath": "_content/backendtest",
   "Mode": "Default",
@@ -57,6 +57,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/47790eb8-bf05-41ad-91d5-73c18e309cf3_copper_mountain.jpg"
+    },
+    {
+      "Identity": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg",
+      "SourceId": "backendtest",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/",
+      "BasePath": "_content/backendtest",
+      "RelativePath": "uploads/82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ej875ksbfj",
+      "Integrity": "+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg"
     },
     {
       "Identity": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/a41daf7d-4588-4cc9-9329-143cb4f1e790_copper_mountain.jpg",
@@ -274,6 +295,88 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 03 Jan 2025 21:41:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.ej875ksbfj.jpg",
+      "AssetFile": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 20 Jan 2025 23:59:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej875ksbfj"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg",
+      "AssetFile": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 20 Jan 2025 23:59:16 GMT"
         },
         {
           "Name": "Cache-Control",

@@ -46,7 +46,7 @@ builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IReviewsRepository, ReviewsRepository>();
 builder.Services.AddScoped<IDonationRepository, DonationRepository>();
-
+builder.Services.AddScoped<IUpdateRepository, UpdateRepository>();
 
 var app = builder.Build();
 
