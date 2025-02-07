@@ -5,16 +5,18 @@ namespace backendtest.Interfaces;
 
 public interface IProjectRepository
 {
-    Task<Project> CreateProjectAsync(CreateProjectDto createProjectDto, string userId, bool isTesting); //трэба
-    
-    Task<List<Project>> GetProjectsByIdAsync(string userId);//трэба
-    Task<ProjectPaginationDto<ProjectResponseDto>> GetProjectsAsyncForUser(int pageNumber, int pageSize);//трэба
-    Task<ProjectPaginationDto<ProjectResponseDto>> UserSearch(string title, int? categoryId, int pageNumber, int pageSize);//трэба 
-    Task<Project> UpdateStatusProjectsForAdmin(int id, Status status);//трэба
-    Task<bool> DeleteProjectByIdAsync(int projectId, string userId);
-    Task<bool> AdminDelete(int projectId);
+    Task<Project> CreateProjectAsync(CreateProjectDto dto, Guid userId);
 
-    Task<ProjectPaginationDto<ProjectResponseDto>> AdminSearch(string title, int? categoryId, int pageNumber, int pageSize);//трэба
+    Task<ProjectPaginationDto<ProjectResponseDto>> SearchProjects(
+        ProjectFilterDto filter,
+        int pageNumber,
+        int pageSize,
+        string? userId,
+        bool isAdmin);
 
+    Task<Project> GetProjectAsync(int id);
+    Task<List<Project>> GetProjectsByUserAsync(Guid userId);
+    Task<bool> DeleteProjectAsync(int projectId, Guid? userId, bool isAdmin);
+    Task<bool> UpdateProjectStatusAsync(int id, Status status);
 
 }

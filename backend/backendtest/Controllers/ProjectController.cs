@@ -1,140 +1,93 @@
 using System.Security.Claims;
-using backendtest.Data;
 using backendtest.Dtos.ProjectDto;
 using backendtest.Interfaces;
-using backendtest.Models;
+using backendtest.Mappers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backendtest.Controllers;
+
 [Route("api/projects")]
 [ApiController]
-
 public class ProjectController : ControllerBase
 {
     private readonly IProjectRepository _projectRepository;
-    private readonly ApplicationContext _context;
 
-    public ProjectController(IProjectRepository projectRepository, ApplicationContext context)
+    public ProjectController(IProjectRepository projectRepository)
     {
         _projectRepository = projectRepository;
-        _context = context;
     }
-    
-    [HttpGet("all-active-projects")] //метод без авторизации для получения всех проектов
-    public async Task<IActionResult> GetAllActiveProjects([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetProjects(
+        [FromQuery] ProjectFilterDto filter,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10)
     {
-        var result = await _projectRepository.GetProjectsAsyncForUser(pageNumber, pageSize);
+        var isAdmin = User.IsInRole("Admin");
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        
+        var result = await _projectRepository.SearchProjects(
+            filter, 
+            pageNumber, 
+            pageSize, 
+            userId,
+            isAdmin);
+
         return Ok(result);
     }
-    
+
+    [HttpPost]
     [Authorize(Policy = "UserPolicy")]
-    [HttpPost("create")]  // создание проекта
-    public async Task<ActionResult<Project>> Post(CreateProjectDto dto)
+    public async Task<ActionResult<ProjectResponseDto>> CreateProject([FromForm] CreateProjectDto dto)
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         if (!ModelState.IsValid) 
             return BadRequest(ModelState);
-        if (string.IsNullOrEmpty(userId))
-        {
-            return Unauthorized("Пользователь не аутентифицирован.");
-        }
 
-        var isTesting = false;//флаг для тестирования
+        var project = await _projectRepository.CreateProjectAsync(dto, Guid.Parse(userId));
         
-        var project = await _projectRepository.CreateProjectAsync(dto, userId, isTesting);
-
-        var response = new ProjectResponseDto
-        {
-            Id = project.Id,
-            Title = project.Title,
-            Description = project.Description,
-            GoalAmount = project.GoalAmount,
-            CollectedAmount = project.CollectedAmount,
-            CreatedAt = project.CreatedAt,
-            CategoryId = project.CategoryId,
-            MediaFiles = project.MediaFiles.Select(m => m.FilePath).ToList()
-        };
-
-        return Ok(response);
+        return CreatedAtAction(
+            nameof(GetProject), 
+            new { id = project.Id }, 
+            project.ToProjectResponseDto());
     }
-    
+
+    [HttpGet("{id}")]
+    [AllowAnonymous]
+    public async Task<ActionResult<ProjectResponseDto>> GetProject(int id)
+    {
+        var project = await _projectRepository.GetProjectAsync(id);
+        if (project == null) return NotFound();
+
+        return Ok(project.ToProjectResponseDto());
+    }
+
+    [HttpGet("my")]
     [Authorize(Policy = "UserPolicy")]
-    [HttpGet("personal-projects")] //получение проектов конкретного юзера
-    public async Task<IActionResult> GetUserProjects()
+    public async Task<IActionResult> GetMyProjects()
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (string.IsNullOrEmpty(userId))
-        {
-            return BadRequest("User ID is not found or invalid.");
-        }
-        var projects = await _projectRepository.GetProjectsByIdAsync(userId);
-        return Ok(projects); 
-    }
-    
-    [HttpGet("user-projects-search")]
-    public async Task<IActionResult> GetSearchProjectsByStatusOrTitle(
-        [FromQuery] string? title,
-        [FromQuery] int? categoryId,
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10)
-    {
-        try
-        {
-            var searchProject = await _projectRepository.UserSearch(title, categoryId, pageNumber, pageSize);
-            return Ok(searchProject);
-        }
-        catch (Exception e)
-        {
-            return StatusCode(500, $"{e.Message}");
-        }
+        var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        var projects = await _projectRepository.GetProjectsByUserAsync(userId);
+        return Ok(projects.Select(p => p.ToProjectResponseDto()));
     }
 
-    [Authorize(Policy = "UserPolicy")]
-    [HttpDelete("delete")]
-    public async Task<bool> DeleteProject(int projectId)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteProject(int id)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        return await _projectRepository.DeleteProjectByIdAsync(projectId, userId);
+        var isAdmin = User.IsInRole("Admin");
+        var userId = isAdmin ? null : (Guid?)Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+        
+        var success = await _projectRepository.DeleteProjectAsync(id, userId, isAdmin);
+        return success ? NoContent() : NotFound();
     }
 
-    
-    
-    // МЕТОДЫ ДЛЯ АДМИНА
-    // [Authorize(Policy = "AdminPolicy")]
-
+    [HttpPatch("{id}/status")]
     [Authorize(Policy = "AdminPolicy")]
-    [HttpPut("admin-update-status")]
-    public async Task<IActionResult> UpdateStatus(int id, Status status)
+    public async Task<IActionResult> UpdateStatus(int id, [FromBody] StatusUpdateDto dto)
     {
-        var result = await _projectRepository.UpdateStatusProjectsForAdmin(id, status);
-        return Ok(result);
+        var success = await _projectRepository.UpdateProjectStatusAsync(id, dto.Status);
+        return success ? NoContent() : NotFound();
     }
-    
-    [Authorize(Policy = "AdminPolicy")]
-    [HttpGet("admin-projects-search")]
-    public async Task<IActionResult> GetSearchProjectsByStatusOrTitleForAdmin( 
-        [FromQuery] string? title,
-        [FromQuery] int? categoryId,
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10)
-    {
-        try
-        {
-            var searchProject = await _projectRepository.AdminSearch(title, categoryId, pageNumber, pageSize);
-            return Ok(searchProject);
-        }
-        catch (Exception e)
-        {
-            return StatusCode(500, $"{e.Message}");
-        }
-    }
-
-    [Authorize(Policy = "AdminPolicy")]
-    [HttpDelete("Admin-delete-project")]
-    public async Task<bool> DeleteProjectAdmin(int projectId)
-    {        
-        return await _projectRepository.AdminDelete(projectId);
-    }
-
 }
