@@ -1,6 +1,9 @@
+using backendtest.Dtos.UserDto;
+using backendtest.Services;
+
 namespace backendtest.Interfaces;
 
 public interface IUserService
 {
-    Task<string> LoginWithGetToken(string userName, string password);
+    Task<Result<string>> LoginAsync(LoginUserDto dto);
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LymKAazd8MPu77vMQOj2Ws7j8VIw57qfCI2MAUoDcqo=",
+  "Hash": "r9LkYB8/bOAaz5Co2e04horqMkjpwijUWLr/aaoLz+c=",
   "Source": "backendtest",
   "BasePath": "_content/backendtest",
   "Mode": "Default",
@@ -57,6 +57,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/47790eb8-bf05-41ad-91d5-73c18e309cf3_copper_mountain.jpg"
+    },
+    {
+      "Identity": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain.jpg",
+      "SourceId": "backendtest",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/",
+      "BasePath": "_content/backendtest",
+      "RelativePath": "uploads/5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ej875ksbfj",
+      "Integrity": "+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain.jpg"
+    },
+    {
+      "Identity": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik.jpg",
+      "SourceId": "backendtest",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/",
+      "BasePath": "_content/backendtest",
+      "RelativePath": "uploads/7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "va7frt66ir",
+      "Integrity": "Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik.jpg"
     },
     {
       "Identity": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg",
@@ -120,6 +162,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg"
+    },
+    {
+      "Identity": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik.jpg",
+      "SourceId": "backendtest",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/",
+      "BasePath": "_content/backendtest",
+      "RelativePath": "uploads/ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "va7frt66ir",
+      "Integrity": "Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik.jpg"
     },
     {
       "Identity": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/f1b7c7cf-acdd-4ca9-b131-935cb5d2d456_copper_mountain.jpg",
@@ -305,6 +368,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain.ej875ksbfj.jpg",
+      "AssetFile": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Feb 2025 20:32:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ej875ksbfj"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain.jpg",
+      "AssetFile": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2590635"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Feb 2025 20:32:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik.jpg",
+      "AssetFile": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11831"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Feb 2025 22:44:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik.va7frt66ir.jpg",
+      "AssetFile": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11831"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Feb 2025 22:44:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "va7frt66ir"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U="
         }
       ]
     },
@@ -551,6 +778,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik.jpg",
+      "AssetFile": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11831"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Feb 2025 20:32:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik.va7frt66ir.jpg",
+      "AssetFile": "/home/capo/my_directory/programming/diplom/backend/backendtest/wwwroot/uploads/ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11831"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Feb 2025 20:32:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "va7frt66ir"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U="
         }
       ]
     },

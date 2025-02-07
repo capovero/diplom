@@ -1,117 +1,113 @@
 using System.Security.Claims;
-using backendtest.Data;
-using backendtest.Dtos.ProjectDto;
 using backendtest.Dtos.UserDto;
-using backendtest.HashPassword;
 using backendtest.Interfaces;
 using backendtest.Mappers;
-using backendtest.Models;
-using backendtest.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace backendtest.Controllers;
-[Route("api/user")]
+
+[Route("api/users")]
 [ApiController]
 public class UserController : ControllerBase
 {
-    
     private readonly IUserRepository _userRepo;
     private readonly IUserService _userService;
-    private readonly HttpContext _httpContext;
-    public UserController( IUserRepository userRepo, IUserService userService)
-    { 
+    
+    public UserController(IUserRepository userRepo, IUserService userService)
+    {
         _userRepo = userRepo;
         _userService = userService;
     }
-    
-    [Authorize("UserPolicy")]
+
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         var users = await _userRepo.GetAllAsync();
-        var usersDto = users.Select(u => u.ToUserDto());
-        return Ok(usersDto);
+        return Ok(users.Select(u => u.ToResponseDto()));
     }
 
-    [HttpGet("{id}")]
-    [Authorize("UserPolicy")]
-    public async Task<IActionResult> GetUserProfile([FromRoute] Guid id)
+    [Authorize]
+    [HttpGet("me")]
+    public async Task<IActionResult> GetMyProfile()
     {
-        var userProfile = await _userRepo.GetUserProfileAsync(id);
-        if (userProfile == null)
-            return NotFound(new { Message = "User not found." });
-        return Ok(userProfile);
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var user = await _userRepo.GetProfileAsync(userId);
+        return Ok(user.ToAdminProfileDto());
     }
 
+    [Authorize(Roles = "Admin")]
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAdminProfile(Guid id)
+    {
+        var user = await _userRepo.GetAdminProfileAsync(id);
+        return Ok(user.ToAdminProfileDto());
+    }
 
-    
-    [Authorize("UserPolicy")]
-    [HttpDelete("DeleteUser")]
+    [Authorize]
+    [HttpDelete]
     public async Task<IActionResult> Delete()
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         var result = await _userRepo.DeleteAsync(userId);
         Response.Cookies.Delete("token");
-        return Ok(result);
+        return result ? NoContent() : BadRequest();
     }
-    
+
     [HttpPost("register")]
-    public async Task <IActionResult> Register(CreateUserDto createUserDto)
+    public async Task<IActionResult> Register([FromBody] CreateUserDto dto)
     {
-    if (!ModelState.IsValid)
-    {
-        return BadRequest("Некорректные данные.");
-    }
-    var answer = await _userRepo.RegisterAsync(createUserDto);
-    if (!answer)
-    {
-        return BadRequest("Не удалось зарегистрировать пользователя.");
-    }
-    return Ok("Пользователь успешно зарегистрирован!");
+        var result = await _userRepo.RegisterAsync(dto);
+    
+        // Явно указываем тип IActionResult
+        return result.Match<IActionResult>(
+            user => CreatedAtAction(
+                nameof(GetMyProfile), 
+                new { id = user.Id }, 
+                user.ToResponseDto()
+            ),
+            error => BadRequest(new { error.Message })
+        );
     }
 
-    [Authorize("UserPolicy")]
-    [HttpPut("id")]
-    public async Task<IActionResult> Update(UpdateUserDto updateUserDto)
+    [Authorize]
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] UpdateUserDto dto)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var result = await _userRepo.UpdateAsync(userId, updateUserDto);
-        return Ok();
-    }
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var result = await _userRepo.UpdateAsync(userId, dto);
     
-    [HttpPost("login")]
-    public async Task<IActionResult> LoginAsync([FromBody] LoginUserDto loginUserDto)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest("Некорректные данные.");
-        }
         
-        var token = await _userService.LoginWithGetToken(loginUserDto.UserName, loginUserDto.Password);
-            HttpContext.Response.Cookies.Append("token", token);
-            return Ok(new { Token = token });
+        return result.Match<IActionResult>(
+            user => Ok(user.ToResponseDto()),
+            error => BadRequest(new { error.Message })
+        );
     }
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginUserDto dto)
+    {
+        var result = await _userService.LoginAsync(dto);
+        return result.Match<IActionResult>(
+            token => {
+                Response.Cookies.Append("token", token);
+                return Ok(new { Token = token });
+            },
+            error => Unauthorized(new { error.Message })
+        );
+    }
+    [HttpPost("logout")]
+    [Authorize]
+    public IActionResult Logout()
+    {
+        // Удаляем куки с токеном
+        Response.Cookies.Delete("token", new CookieOptions
+        {
+            HttpOnly = true, // Защита от XSS
+            Secure = true, // Только для HTTPS
+            SameSite = SameSiteMode.Strict
+        });
     
-    //АДМИНСКИЕ МЕТОДЫ
-    [Authorize("AdminPolicy")]
-    [HttpDelete("Admin-delete-user")]
-    public async Task<IActionResult> AdminDelete(Guid userId)
-    {
-        var result = await _userRepo.DeleteAdmin(userId);
-        if (!result)
-            return BadRequest("user not found");
-        return Ok(result); 
+        return Ok(new { Message = "Successfully logged out" });
     }
-    [Authorize("AdminPolicy")]
-    [HttpGet("GetUserProfileForAdmin/{id}")]
-    public async Task<IActionResult> GetUserProfileForAdmin([FromRoute] Guid id)
-    {
-        var userProfile = await _userRepo.GetUserProfileForAdminAsync(id);
-        if (userProfile == null)
-            return NotFound(new { Message = "User not found." });
-        return Ok(userProfile);
-    }
-
 }

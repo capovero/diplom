@@ -1,123 +1,91 @@
-using System.Net.Mime;
 using backendtest.Data;
-using backendtest.Dtos.ProjectDto;
 using backendtest.Dtos.UserDto;
-using backendtest.HashPassword;
 using backendtest.Interfaces;
-using backendtest.Mappers;
 using backendtest.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
+using backendtest.Services;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace backendtest.Repository
+namespace backendtest.Repository;
+
+public class UserRepository : IUserRepository
 {
-    public class UserRepository : IUserRepository
+    private readonly ApplicationContext _context;
+    private readonly IPasswordHasher _hasher;
+
+    public UserRepository(ApplicationContext context, IPasswordHasher hasher)
     {
-        private readonly ApplicationContext _context;
-        
-        private readonly IPasswordHasher _passwordHasher;
+        _context = context;
+        _hasher = hasher;
+    }
 
-        public UserRepository(ApplicationContext context, IPasswordHasher passwordHasher)
-        {
-            _context = context;
-            _passwordHasher = passwordHasher;
-        }
+    public async Task<List<User>> GetAllAsync()
+    {
+        return await _context.Users.ToListAsync();
+    }
 
-        public Task<List<User>> GetAllAsync()
-        {
-            return _context.Users.ToListAsync();
-        }
-        public async Task<UserProfileDto> GetUserProfileAsync(Guid userId)
-        {
-            var user = await _context.Users
-                .Include(u => u.Projects)
-                .ThenInclude(p => p.MediaFiles)
-                .FirstOrDefaultAsync(u => u.Id == userId);
+    public async Task<Result<User>> RegisterAsync(CreateUserDto dto)
+    {
+        if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
+            return Result<User>.Failure(new Error("Email уже существует"));
 
-            if (user == null)
-                return null;
+        var user = new User(
+            Guid.NewGuid(),
+            dto.UserName,
+            dto.Email,
+            _hasher.Generate(dto.Password),
+            "User"
+        );
 
-            return user.ToUserProfileDto();
-        }
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+        return Result<User>.Success(user);
+    }
 
+    public async Task<Result<User>> UpdateAsync(Guid id, UpdateUserDto dto)
+    {
+        var user = await _context.Users.FindAsync(id);
+        if (user == null) 
+            return Result<User>.Failure(new Error("Пользователь не найден"));
 
-        
-        public async Task<bool> DeleteAsync(string userId)
-        {
-            var guidId = Guid.Parse(userId);
-            var user = await _context.Users.FindAsync(guidId);
-            if(user == null)
-                return false;
-            _context.Users.Remove(user);
-            return await _context.SaveChangesAsync() > 0;
-        }
+        user.UserName = dto.UserName ?? user.UserName;
+        user.Email = dto.Email ?? user.Email;
 
-        public async Task<bool> RegisterAsync(CreateUserDto createUserDto)
-        {
-            var exists = await _context.Users.AnyAsync(u => u.Email == createUserDto.Email || u.UserName == createUserDto.UserName);
-            if (exists)
-            {
-                return false; // Email или имя пользователя уже заняты
-            }
-            var newUser = new User
-            {
-                Id = Guid.NewGuid(),
-                UserName = createUserDto.UserName,
-                Email = createUserDto.Email,
-                PasswordHash = _passwordHasher.Generate(createUserDto.Password)
-            };
-            await _context.Users.AddAsync(newUser);
-            await _context.SaveChangesAsync();
-            return true;
-        }
+        if (!string.IsNullOrEmpty(dto.Password))
+            user.PasswordHash = _hasher.Generate(dto.Password);
 
-        public async Task<User> UpdateAsync(string userId, UpdateUserDto updateUserDto)
-        {
-            var idGuid = Guid.Parse(userId);
-            var user = await _context.Users.FindAsync(idGuid);
-         
-            if (user == null)
-            {
-                throw new Exception("User not found.");
-            }
+        await _context.SaveChangesAsync();
+        return Result<User>.Success(user);
+    }
 
-            user.ToUpdateUserDto(updateUserDto);         
-            _context.Entry(user).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return user;
-        }
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        var user = await _context.Users.FindAsync(id);
+        if (user == null) return false;
 
-        public async Task<User?> GetByName(string userName)
-        {
-            var userEntity = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName)
-                ?? throw new Exception("User not found");
-            return (userEntity);
-        }
-        //АДМИНСКИЕ МЕТОДЫ 
-        public async Task<bool> DeleteAdmin(Guid userId)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            if(user == null)
-                return false;
-            _context.Users.Remove(user);
-            return await _context.SaveChangesAsync() > 0;
-        }
-        
-        public async Task<UserProfileDto> GetUserProfileForAdminAsync(Guid userId)
-        {
-            var user = await _context.Users
-                .IgnoreQueryFilters() // Учитывает глобальные фильтры
-                .Include(u => u.Projects)
-                .ThenInclude(p => p.MediaFiles)
-                .FirstOrDefaultAsync(u => u.Id == userId);
+        _context.Users.Remove(user);
+        return await _context.SaveChangesAsync() > 0;
+    }
 
-            if (user == null)
-                return null;
-            return user.AdminToUserProfileDto();
+    public async Task<User?> GetProfileAsync(Guid id)
+    {
+        return await _context.Users
+            .Include(u => u.Projects)
+            .ThenInclude(p => p.MediaFiles)
+            .FirstOrDefaultAsync(u => u.Id == id);
+    }
 
-        }
-
+    public async Task<User?> GetAdminProfileAsync(Guid id)
+    {
+        return await _context.Users
+            .IgnoreQueryFilters()
+            .Include(u => u.Projects)
+            .ThenInclude(p => p.MediaFiles)
+            .FirstOrDefaultAsync(u => u.Id == id);
+    }
+    public async Task<User?> GetByName(string userName)
+    {
+        return await _context.Users
+            .FirstOrDefaultAsync(u => u.UserName == userName);
     }
 }

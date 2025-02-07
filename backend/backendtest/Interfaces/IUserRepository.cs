@@ -1,19 +1,15 @@
 using backendtest.Dtos.UserDto;
 using backendtest.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace backendtest.Interfaces;
+using backendtest.Services;
 
 public interface IUserRepository
 {
+    Task<Result<User>> RegisterAsync(CreateUserDto dto);
+    Task<Result<User>> UpdateAsync(Guid id, UpdateUserDto dto);
+    Task<bool> DeleteAsync(Guid id);
+    Task<User?> GetProfileAsync(Guid id);
+    Task<User?> GetAdminProfileAsync(Guid id);
     Task<List<User>> GetAllAsync();
-    Task<UserProfileDto> GetUserProfileAsync(Guid userId);
-    Task<bool> DeleteAsync(string userId);
-    Task<bool> RegisterAsync(CreateUserDto createUserDto);
-    Task<User> UpdateAsync(string userId, UpdateUserDto updateUserDto); // Метод принимает ID и данные для обновления
-    Task<User?> GetByName(string userName);
     
-    // админские
-  Task<bool> DeleteAdmin(Guid userId);
-  Task<UserProfileDto> GetUserProfileForAdminAsync(Guid userId);
+    Task<User?> GetByName(string userName);
 }

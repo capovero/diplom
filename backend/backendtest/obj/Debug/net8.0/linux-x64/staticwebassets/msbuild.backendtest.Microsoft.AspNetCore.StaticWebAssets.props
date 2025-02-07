@@ -36,6 +36,42 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\47790eb8-bf05-41ad-91d5-73c18e309cf3_copper_mountain.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>backendtest</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/backendtest</BasePath>
+      <RelativePath>uploads/5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>ej875ksbfj</Fingerprint>
+      <Integrity>+punCK173t8TDeDTHIv8HF3Qo4HBgKOr1jOcSkv6Uf8=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\5b8bf67a-f088-49b3-85e6-18ee3f92e7d7_copper_mountain.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>backendtest</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/backendtest</BasePath>
+      <RelativePath>uploads/7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>va7frt66ir</Fingerprint>
+      <Integrity>Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\7e9ee9a4-d590-473a-877f-d21d9ef97f24_chine-barik.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\82084b9e-c091-47a8-b3ae-e3bde2af7723_copper_mountain.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>backendtest</SourceId>
@@ -89,6 +125,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\d634e536-7f0b-43dd-9652-5371192ae63b_copper_mountain.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>backendtest</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/backendtest</BasePath>
+      <RelativePath>uploads/ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>va7frt66ir</Fingerprint>
+      <Integrity>Sb7e074YzSKQ4oOudPyJvo1AwxxIe9u8Lzk4uuFNM2U=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\ea584125-edd8-400f-a2f7-cb41945d17ed_chine-barik.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\f1b7c7cf-acdd-4ca9-b131-935cb5d2d456_copper_mountain.jpg'))">
       <SourceType>Package</SourceType>

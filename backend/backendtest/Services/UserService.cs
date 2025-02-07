@@ -1,36 +1,38 @@
-using backendtest.Models;
-using backendtest.Data;
+using backendtest.Dtos.UserDto;
 using backendtest.Interfaces;
-using backendtest.Repository;
+using backendtest.Models;
+using backendtest.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace backendtest.Services;
 
 public class UserService : IUserService
 {
-    private readonly ApplicationContext _context;
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher _passwordHasher;
     private readonly IJwtProvider _jwtProvider;
 
-    public UserService(ApplicationContext context, IUserRepository userRepository, IPasswordHasher passwordHasher, IJwtProvider jwtProvider)
+    public UserService(
+        IUserRepository userRepository,
+        IPasswordHasher passwordHasher,
+        IJwtProvider jwtProvider)
     {
-        _context = context;
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
         _jwtProvider = jwtProvider;
     }
     
-    public async Task<string> LoginWithGetToken(string userName, string password)
+    public async Task<Result<string>> LoginAsync(LoginUserDto dto)
     {
-        var user = await _userRepository.GetByName(userName);
-        var result = _passwordHasher.Verify(password, user.PasswordHash);
-        if (result == false)
-        {
-            throw new Exception("Invalid username or password");
-        }
-        var token = _jwtProvider.GenerateToken(user);
-        return token;
-    }
+        var user = await _userRepository.GetByName(dto.UserName);
+        if (user == null)
+            return Result<string>.Failure(new Error("User not found"));
 
-   
+        var isValid = _passwordHasher.Verify(dto.Password, user.PasswordHash);
+        if (!isValid)
+            return Result<string>.Failure(new Error("Invalid password"));
+
+        var token = _jwtProvider.GenerateToken(user);
+        return Result<string>.Success(token);
+    }
 }

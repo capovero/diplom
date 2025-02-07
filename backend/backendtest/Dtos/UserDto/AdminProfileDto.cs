@@ -1,11 +1,10 @@
-// backendtest/Dtos/UserDto/UserProfileDto.cs
 using backendtest.Dtos.ProjectDto;
 
 namespace backendtest.Dtos.UserDto;
 
-public record UserProfileDto(
+public record AdminProfileDto(
     Guid Id,
     string UserName,
     string Email,
-    List<ProjectResponseDto> Projects
-);
+    string Role,
+    List<ProjectResponseDto> Projects);

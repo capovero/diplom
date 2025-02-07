@@ -26,7 +26,7 @@ public class Project
     public User User { get; set; }
     
     // Внешний ключ и связь с категорией
-    public int? CategoryId { get; set; }
+    public int CategoryId { get; set; }
     public Category Category { get; set; }
     
     // Проект может иметь много обновлений

@@ -1,61 +1,44 @@
+using backendtest.Dtos.ProjectDto;
 using backendtest.Dtos.UserDto;
 using backendtest.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
-using backendtest.HashPassword;
 
 namespace backendtest.Mappers;
 
 public static class UserMappers
 {
-    public static UserDto ToUserDto(this User usermodel)
-    {
-        return new UserDto
-        {
-            Id = usermodel.Id,
-            UserName = usermodel.UserName,
-            Email = usermodel.Email
-        };
-    }
-
-    public static CreateUserDto ToCreateUserDto(this CreateUserDto usermodel)
-    {
-        return new CreateUserDto
-        {
-            UserName = usermodel.UserName,
-            Email = usermodel.Email,
-            Password = usermodel.Password  
-        };
-    }
     
-    public static void ToUpdateUserDto(this User user, UpdateUserDto updateUserDto)
+    public static UserResponseDto ToResponseDto(this User user)
     {
-        user.UserName = updateUserDto.UserName;
-        user.Email = updateUserDto.Email;
+        return new UserResponseDto(
+            user.Id,
+            user.UserName,
+            user.Email
+        );
     }
 
+    
     public static UserProfileDto ToUserProfileDto(this User user)
     {
-        return new UserProfileDto
-        {
-            Id = user.Id,
-            Name = user.UserName,
-            Email = user.Email,
-            Projects = user.Projects.Where(p => p.Status == Status.Active).Select(p => p.ToProjectResponseDto())
+        return new UserProfileDto(
+            user.Id,
+            user.UserName,
+            user.Email,
+            user.Projects
+                .Where(p => p.Status == Status.Active)
+                .Select(p => p.ToProjectResponseDto()) 
                 .ToList()
-        };
+        );
     }
 
-    public static UserProfileDto AdminToUserProfileDto(this User user)
+   
+    public static AdminProfileDto ToAdminProfileDto(this User user)
     {
-        return new UserProfileDto
-        {
-            Id = user.Id,
-            Name = user.UserName,
-            Email = user.Email,
-            Projects = user.Projects.Select(p => p.ToProjectResponseDto())
-                .ToList()
-        };
+        return new AdminProfileDto(
+            user.Id,
+            user.UserName,
+            user.Email,
+            user.Role,
+            user.Projects.Select(p => p.ToProjectResponseDto()).ToList() // Маппинг с медиафайлами
+        );
     }
-    
-
 }
