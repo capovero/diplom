@@ -16,7 +16,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Подключаем базу данных
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 // Настраиваем JwtOptions
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
 

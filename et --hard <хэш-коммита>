@@ -1,0 +1,101 @@
+[33mcommit 4ca934dd38560021a10ae725d37b43dd666cc734[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: capovero <xexevheburator@gmail.com>
+Date:   Fri Nov 15 23:03:30 2024 +0300
+
+    first setting for models
+
+[33mcommit c1296e981a81e27a18ae41da211c1a05ec77cdc8[m
+Author: capovero <xexevheburator@gmail.com>
+Date:   Tue Nov 5 02:26:15 2024 +0300
+
+    backend on arch
+
+[33mcommit f9718f0adbc877017f2063e02b4af1f67d50ab7c[m
+Author: capovero <xexevheburator@gmail.com>
+Date:   Mon Nov 4 23:34:45 2024 +0300
+
+    without backend
+
+[33mcommit 8c8d6f87cae27e59585d81a6a123f477ae1d7563[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Fri Nov 1 16:25:59 2024 +0300
+
+    delete and update
+
+[33mcommit e5c6268aaa4ca36e9c21c91c3cf1ab2d42971ed4[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Fri Nov 1 16:02:38 2024 +0300
+
+    firts complete backend
+
+[33mcommit b90328cd2d5cac4e011702744ee2ab1879c51fb7[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Thu Oct 31 23:39:52 2024 +0300
+
+    tilt
+
+[33mcommit b354e98e21973fa23f49d5f0fd33c5501c907fa4[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Tue Oct 29 20:03:13 2024 +0300
+
+    first experience with backend
+
+[33mcommit cf3b94208a6d3c167401e55de07c3edb5c38f5bd[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Tue Oct 29 20:02:04 2024 +0300
+
+    first experience with backend
+
+[33mcommit 2ffd1cdfa2cc02be318690e8c991519e91ef58b9[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Tue Oct 29 18:14:44 2024 +0300
+
+    just added the backend to the project
+
+[33mcommit 3b5b311c83a43c5ec9949caa0ad508b92f38b402[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Fri Oct 25 12:57:25 2024 +0300
+
+    registration in local storage
+
+[33mcommit 9f8a105edb50db08301f3e8cc717cefbe3422fe8[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Fri Oct 25 11:23:58 2024 +0300
+
+    registration with hook
+
+[33mcommit c9f0d63182ed28d521170cd1d0f1fa67790dad72[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Thu Oct 24 14:12:54 2024 +0300
+
+    registration without hook
+
+[33mcommit 4c59e602a90ee1732e4b65433fabbd38c7b93f7e[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Wed Oct 23 15:54:11 2024 +0300
+
+    Sign In complete
+
+[33mcommit 0b0f7d4c827053adede31751553ed783d5dcc13d[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Mon Oct 21 21:33:48 2024 +0300
+
+    registration with styles without validation
+
+[33mcommit 719bc128864c2a69f811c6a4ab1bb17e8af69652[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Mon Oct 21 21:04:49 2024 +0300
+
+    skeleton of registration
+
+[33mcommit c96d894e16b4ed9924dde54154b991b732236eb7[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Mon Oct 21 20:17:28 2024 +0300
+
+    Initial commit with empty project and libraries
+
+[33mcommit 8d44433c0655117a81fdd4952bca5fd357351fe3[m
+Author: capo <xexevheburator@gmail.com>
+Date:   Mon Oct 21 20:13:08 2024 +0300
+
+    Initialize project using Create React App

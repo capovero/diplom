@@ -27,14 +27,14 @@ public class CategoryController : ControllerBase
         return Ok(newCategory);
     }
 
-    [Authorize(Policy = "UserPolicy")]
+    [AllowAnonymous]
     [HttpGet("getAll")]
     public async Task<IActionResult> GetAllCategories()
     {
         var categories = await _categoryRepository.GetCategories();
         return Ok(categories);
     }
-    
+
     [Authorize(Policy = "AdminPolicy")]
     [HttpPut("update")]
     public async Task<IActionResult> UpdateCategory([FromBody] string category, int id)

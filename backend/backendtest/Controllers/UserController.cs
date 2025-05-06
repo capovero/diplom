@@ -100,11 +100,11 @@ public class UserController : ControllerBase
     [Authorize]
     public IActionResult Logout()
     {
-        // Удаляем куки с токеном
+        
         Response.Cookies.Delete("token", new CookieOptions
         {
-            HttpOnly = true, // Защита от XSS
-            Secure = true, // Только для HTTPS
+            HttpOnly = true,
+            Secure = true, 
             SameSite = SameSiteMode.Strict
         });
     
