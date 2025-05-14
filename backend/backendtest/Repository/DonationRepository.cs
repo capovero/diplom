@@ -84,14 +84,15 @@ public class DonationRepository : IDonationRepository
     {
         var userGuid = Guid.Parse(userId);
         return await _context.Donations
+            .Include(d => d.Project)
             .Where(d => d.UserId == userGuid)
-            .Select(d => new DonationUserDto
-            {
+            .Select(d => new DonationUserDto {
                 Amount = d.Amount,
                 DonateAt = d.DonateAt,
-                ProjectTitle = d.Project.Title,
+                ProjectTitle = d.Project.Title
             })
             .ToListAsync();
+
     }
 
     public async Task<List<DonationResponceDto>> GetDonationsByProjectForAdminAsync(int projectId)

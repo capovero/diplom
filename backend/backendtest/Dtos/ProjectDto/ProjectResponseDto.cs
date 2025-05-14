@@ -11,7 +11,7 @@ public record ProjectResponseDto(
     decimal GoalAmount,
     decimal CollectedAmount,
     DateTime CreatedAt,
-    int CategoryId,
+    string? CategoryName,
     Status Status,
     List<string> MediaFiles,
     double? AverageRating

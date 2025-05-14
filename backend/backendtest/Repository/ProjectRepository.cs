@@ -19,6 +19,11 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<Project> CreateProjectAsync(CreateProjectDto dto, Guid userId)
     {
+        if (dto.CategoryId.HasValue && 
+            !await _context.Categories.AnyAsync(c => c.Id == dto.CategoryId))
+        {
+            throw new ArgumentException("Invalid Category ID");
+        }
         var project = new Project
         {
             Title = dto.Title,
@@ -121,7 +126,9 @@ public class ProjectRepository : IProjectRepository
     {
         return await _context.Projects
             .Include(p => p.MediaFiles)
+            .Include(p => p.Category) 
             .Where(p => p.UserId == userId)
+            .AsSplitQuery() 
             .ToListAsync();
     }
 

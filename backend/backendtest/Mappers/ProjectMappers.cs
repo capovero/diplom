@@ -15,7 +15,7 @@ public static class ProjectMappers
             project.GoalAmount,
             project.CollectedAmount,
             project.CreatedAt,
-            project.CategoryId,
+            project.Category?.Name,
             project.Status,
             project.MediaFiles.Select(m => m.FilePath).ToList(),
             project.AverageRating

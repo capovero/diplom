@@ -59,8 +59,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Register([FromBody] CreateUserDto dto)
     {
         var result = await _userRepo.RegisterAsync(dto);
-
-        // Явно указываем тип IActionResult
+        
         return result.Match<IActionResult>(
             user => CreatedAtAction(
                 nameof(GetMyProfile),

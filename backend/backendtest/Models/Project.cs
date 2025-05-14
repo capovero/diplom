@@ -16,7 +16,7 @@ public class Project
     public Status Status { get; set; } = Status.Pending; 
     public Guid UserId { get; set; }
     public User User { get; set; }
-    public int CategoryId { get; set; }
+    public int? CategoryId { get; set; }
     public Category Category { get; set; }
     public ICollection<Update> Updates { get; set; } = new List<Update>();
     public ICollection<Media> MediaFiles { get; set; } = new List<Media>();
