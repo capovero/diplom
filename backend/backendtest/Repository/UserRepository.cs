@@ -51,9 +51,6 @@ public class UserRepository : IUserRepository
         user.UserName = dto.UserName ?? user.UserName;
         user.Email = dto.Email ?? user.Email;
 
-        if (!string.IsNullOrEmpty(dto.Password))
-            user.PasswordHash = _hasher.Generate(dto.Password);
-
         await _context.SaveChangesAsync();
         return Result<User>.Success(user);
     }

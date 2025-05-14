@@ -19,22 +19,22 @@ public class JwtProvider : IJwtProvider
     
     public string GenerateToken(User user)
     {
-        Claim[] claims = 
+        var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Role, user.Role)
         };
-        var signingCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey)),
-            SecurityAlgorithms.HmacSha256);
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey));
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
         var token = new JwtSecurityToken(
             claims: claims,
-            signingCredentials: signingCredentials,
-            expires: DateTime.UtcNow.AddHours(_options.ExpiresHours));
-        
-        var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
-        return tokenValue;
+            expires: DateTime.UtcNow.AddHours(_options.ExpiresHours),
+            signingCredentials: credentials
+        );
 
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
 

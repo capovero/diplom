@@ -27,10 +27,6 @@ public class User
     public ICollection<Donation> Donations { get; set; } = new List<Donation>();
     
     public ICollection<Review> Reviews { get; set; } = new List<Review>(); 
-
-    // Один пользователь может создать много проектов.
-    //Один пользователь может поддерживать много проектов.
-
     public static (User? User, string error) Create(Guid id, string userName, string email, string password)
     {
         var error = string.Empty;

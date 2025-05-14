@@ -13,7 +13,7 @@ public class UserController : ControllerBase
 {
     private readonly IUserRepository _userRepo;
     private readonly IUserService _userService;
-    
+
     public UserController(IUserRepository userRepo, IUserService userService)
     {
         _userRepo = userRepo;
@@ -59,12 +59,12 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Register([FromBody] CreateUserDto dto)
     {
         var result = await _userRepo.RegisterAsync(dto);
-    
+
         // Явно указываем тип IActionResult
         return result.Match<IActionResult>(
             user => CreatedAtAction(
-                nameof(GetMyProfile), 
-                new { id = user.Id }, 
+                nameof(GetMyProfile),
+                new { id = user.Id },
                 user.ToResponseDto()
             ),
             error => BadRequest(new { error.Message })
@@ -77,37 +77,44 @@ public class UserController : ControllerBase
     {
         var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         var result = await _userRepo.UpdateAsync(userId, dto);
-    
-        
+
+
         return result.Match<IActionResult>(
             user => Ok(user.ToResponseDto()),
             error => BadRequest(new { error.Message })
         );
     }
+
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginUserDto dto)
     {
         var result = await _userService.LoginAsync(dto);
         return result.Match<IActionResult>(
-            token => {
-                Response.Cookies.Append("token", token);
+            token =>
+            {
+                Response.Cookies.Append("token", token, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = Request.IsHttps,
+                    SameSite = SameSiteMode.Lax,
+                    Expires = DateTime.UtcNow.AddHours(1)
+                });
                 return Ok(new { Token = token });
             },
             error => Unauthorized(new { error.Message })
         );
     }
+
     [HttpPost("logout")]
     [Authorize]
     public IActionResult Logout()
     {
-        
         Response.Cookies.Delete("token", new CookieOptions
         {
             HttpOnly = true,
-            Secure = true, 
-            SameSite = SameSiteMode.Strict
+            Secure = Request.IsHttps,
+            SameSite = SameSiteMode.Lax
         });
-    
         return Ok(new { Message = "Successfully logged out" });
     }
 }
