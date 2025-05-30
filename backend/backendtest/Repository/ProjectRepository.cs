@@ -19,6 +19,11 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<Project> CreateProjectAsync(CreateProjectDto dto, Guid userId)
     {
+        if (dto.CategoryId == 0)
+        {
+            dto.CategoryId = null;
+        }
+
         if (dto.CategoryId.HasValue && 
             !await _context.Categories.AnyAsync(c => c.Id == dto.CategoryId))
         {
@@ -79,15 +84,13 @@ public class ProjectRepository : IProjectRepository
             .Include(p => p.MediaFiles)
             .AsQueryable();
 
-        // Для неадминов
+        
         if (!isAdmin)
         {
-            // Для авторизованных пользователей
             if (!string.IsNullOrEmpty(userId))
             {
                 var guidUserId = Guid.Parse(userId);
-            
-                // Создаем выражение, которое EF Core сможет перевести в SQL
+                
                 query = query.Where(p => 
                     p.Status == Status.Active || 
                     p.UserId == guidUserId
@@ -95,23 +98,21 @@ public class ProjectRepository : IProjectRepository
             }
             else
             {
-                // Для неавторизованных - только активные проекты
                 query = query.Where(p => p.Status == Status.Active);
             }
         }
-
-        // Фильтры для всех пользователей
+        
         if (!string.IsNullOrWhiteSpace(filter.Title))
             query = query.Where(p => p.Title.Contains(filter.Title));
 
-        if (filter.CategoryId.HasValue)
+        if (filter.CategoryId.HasValue && filter.CategoryId.Value > 0)
+        {
             query = query.Where(p => p.CategoryId == filter.CategoryId);
-
-        // Фильтр по статусу только для админа
+        }
+        
         if (filter.Status.HasValue && isAdmin)
             query = query.Where(p => p.Status == filter.Status.Value);
-
-        // Пагинация и выполнение запроса
+        
         var totalRecords = await query.CountAsync();
         var projects = await query
             .OrderByDescending(p => p.CreatedAt)
