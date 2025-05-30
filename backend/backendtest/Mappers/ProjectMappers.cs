@@ -17,7 +17,7 @@ public static class ProjectMappers
             project.CreatedAt,
             project.Category?.Name,
             project.Status,
-            project.MediaFiles.Select(m => m.FilePath).ToList(),
+            project.MediaFiles.Select(m => $"/uploads/{m.FilePath}").ToList(),
             project.AverageRating
         );
     }

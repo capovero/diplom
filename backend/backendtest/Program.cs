@@ -77,6 +77,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseRouting();
+app.UseStaticFiles();
 app.UseCors("DevCors"); 
 app.UseAuthentication();
 app.UseAuthorization();
