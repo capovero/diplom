@@ -4,11 +4,13 @@ using backendtest.Configurations;
 using backendtest.Data;
 using backendtest.HashPassword;
 using backendtest.Interfaces;
+using backendtest.Mappers;
 using backendtest.Repository;
 using backendtest.Services;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +52,15 @@ builder.Services.AddScoped<IUpdateRepository, UpdateRepository>();
 
 var app = builder.Build();
 
+var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+if (!Directory.Exists(uploadsPath)) Directory.CreateDirectory(uploadsPath);
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(uploadsPath),
+    RequestPath = "/uploads"
+});
+
 app.Use(async (context, next) =>
 {
     Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
@@ -83,4 +94,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+var httpContextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
+ProjectMappers.Configure(httpContextAccessor);
+
 app.Run();
