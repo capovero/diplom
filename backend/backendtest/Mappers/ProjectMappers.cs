@@ -1,13 +1,17 @@
+// backendtest/Mappers/ProjectMappers.cs
+
 using backendtest.Dtos.ProjectDto;
+using backendtest.Dtos.UserDto;
 using backendtest.Models;
 using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace backendtest.Mappers;
 
 public static class ProjectMappers
 {
     private static IHttpContextAccessor? _httpContextAccessor;
-
+    
     public static void Configure(IHttpContextAccessor httpContextAccessor)
     {
         _httpContextAccessor = httpContextAccessor;
@@ -22,7 +26,7 @@ public static class ProjectMappers
 
         var request = _httpContextAccessor.HttpContext.Request;
         var baseUrl = $"{request.Scheme}://{request.Host}";
-
+        
         return new ProjectResponseDto(
             project.Id,
             project.Title,
@@ -33,7 +37,12 @@ public static class ProjectMappers
             project.Category?.Name,
             project.Status,
             project.MediaFiles.Select(m => $"{baseUrl}/uploads/{m.FilePath}").ToList(),
-            project.AverageRating
+            project.AverageRating,
+            new UserResponseDto(
+                project.User.Id,         // 
+                project.User.UserName,   // 
+                project.User.Email       // 
+            )
         );
     }
 }

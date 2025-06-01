@@ -81,6 +81,8 @@ public class ProjectRepository : IProjectRepository
         bool isAdmin)
     {
         var query = _context.Projects
+            .Include(p => p.User)        //
+            .Include(p => p.Category)    //
             .Include(p => p.MediaFiles)
             .AsQueryable();
 
@@ -132,6 +134,7 @@ public class ProjectRepository : IProjectRepository
     public async Task<Project> GetProjectAsync(int id)
     {
         return await _context.Projects
+            .Include(p => p.User)
             .Include(p => p.MediaFiles)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
@@ -142,6 +145,7 @@ public class ProjectRepository : IProjectRepository
             .Include(p => p.MediaFiles)
             .Include(p => p.Category) 
             .Where(p => p.UserId == userId)
+            .Include(p => p.User)
             .AsSplitQuery() 
             .ToListAsync();
     }

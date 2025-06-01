@@ -81,7 +81,7 @@ public class ReviewsController : ControllerBase
     }
     
     [HttpGet("one-project-reviews")]
-    [Authorize("UserPolicy")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetReviewsByProjectId(int projectId)
     {
         try
