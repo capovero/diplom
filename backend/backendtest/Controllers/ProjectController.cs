@@ -82,6 +82,28 @@ public class ProjectController : ControllerBase
         var success = await _projectRepository.DeleteProjectAsync(id, userId, isAdmin);
         return success ? NoContent() : NotFound();
     }
+    
+    [HttpPut("{id}")]
+    [Authorize(Policy = "UserPolicy")]
+    public async Task<IActionResult> UpdateProject(int id, [FromForm] UpdateProjectDto dto)
+    {
+        var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdStr == null) return Unauthorized();
+
+        bool isAdmin = User.IsInRole("Admin");
+        Guid? userId = isAdmin ? (Guid?)null : Guid.Parse(userIdStr);
+
+        var success = await _projectRepository.UpdateProjectAsync(id, dto, userId, isAdmin);
+        if (!success)
+        {
+            return Forbid();
+        }
+        
+        var updatedProject = await _projectRepository.GetProjectAsync(id);
+        if (updatedProject == null) return NotFound();
+
+        return Ok(updatedProject.ToProjectResponseDto());
+    }
 
     [HttpPatch("{id}/status")]
     [Authorize(Policy = "AdminPolicy")]

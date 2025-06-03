@@ -136,6 +136,7 @@ public class ProjectRepository : IProjectRepository
         return await _context.Projects
             .Include(p => p.User)
             .Include(p => p.MediaFiles)
+            .Include(p => p.Category) 
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
@@ -163,6 +164,40 @@ public class ProjectRepository : IProjectRepository
 
         _context.Medias.RemoveRange(project.MediaFiles);
         _context.Projects.Remove(project);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+    
+    public async Task<bool> UpdateProjectAsync(int projectId, UpdateProjectDto dto, Guid? userId, bool isAdmin)
+    {
+        var project = await _context.Projects
+            .Include(p => p.MediaFiles)
+            .Include(p => p.Category)
+            .FirstOrDefaultAsync(p => p.Id == projectId);
+
+        if (project == null) return false;
+        
+        if (!isAdmin && (userId == null || project.UserId != userId.Value))
+        {
+            return false;
+        }
+        
+        project.Title = dto.Title;
+        project.Description = dto.Description;
+        project.GoalAmount = dto.GoalAmount;
+        
+        if (!dto.CategoryId.HasValue || dto.CategoryId == 0)
+        {
+            project.CategoryId = null;
+        }
+        else
+        {
+            project.CategoryId = dto.CategoryId;
+        }
+
+        project.UpdatedAt = DateTime.UtcNow;
+
+        _context.Projects.Update(project);
         await _context.SaveChangesAsync();
         return true;
     }
