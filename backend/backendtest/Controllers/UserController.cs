@@ -153,4 +153,12 @@ public class UserController : ControllerBase
         });
         return Ok(new { Message = "Successfully logged out" });
     }
+    
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUserById(Guid id)
+    {
+        var success = await _userRepo.DeleteByIdAsync(id);
+        return success ? NoContent() : NotFound();
+    }
 }

@@ -12,4 +12,6 @@ public interface IUserRepository
     Task<List<User>> GetAllAsync();
     
     Task<User?> GetByName(string userName);
+    
+    Task<bool> DeleteByIdAsync(Guid id);
 }

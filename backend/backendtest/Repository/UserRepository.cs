@@ -85,4 +85,14 @@ public class UserRepository : IUserRepository
         return await _context.Users
             .FirstOrDefaultAsync(u => u.UserName == userName);
     }
+    
+    public async Task<bool> DeleteByIdAsync(Guid id)
+    {
+        var user = await _context.Users.FindAsync(id);
+        if (user == null) return false;
+
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 }
