@@ -1,65 +1,73 @@
-using backendtest.Data;
+// backendtest/Controllers/CategoryController.cs
+
 using backendtest.Interfaces;
 using backendtest.Models;
+using backendtest.Dtos.CategoryDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace backendtest.Controllers;
-[Route("api/categories")]
-[ApiController]
-
-public class CategoryController : ControllerBase
+namespace backendtest.Controllers
 {
-    private readonly ICategoryRepository _categoryRepository;
-    private readonly ApplicationContext _context;
-
-    public CategoryController(ICategoryRepository categoryRepository, ApplicationContext context)
+    [Route("api/categories")]
+    [ApiController]
+    public class CategoryController : ControllerBase
     {
-        _categoryRepository = categoryRepository;
-        _context = context;
-    }
+        private readonly ICategoryRepository _categoryRepository;
 
-    [Authorize(Policy = "AdminPolicy")]
-    [HttpPost("create")]
-    public async Task<IActionResult> CreateCategory([FromBody] string category)
-    {
-        var newCategory = await _categoryRepository.CreateCategory(category);
-        return Ok(newCategory);
-    }
-
-    [AllowAnonymous]
-    [HttpGet("getAll")]
-    public async Task<IActionResult> GetAllCategories()
-    {
-        var categories = await _categoryRepository.GetCategories();
-        return Ok(categories);
-    }
-
-    [Authorize(Policy = "AdminPolicy")]
-    [HttpPut("update")]
-    public async Task<IActionResult> UpdateCategory([FromBody] string category, int id)
-    {
-        var updatedCategory = await _categoryRepository.UpdateCategory(id, category); // Ожидаем завершения задачи
-        return Ok(updatedCategory); // Возвращаем результат
-    }
-
-    [Authorize(Policy = "AdminPolicy")]
-    [HttpDelete("delete")]
-    public async Task<IActionResult> DeleteCategory(int id)
-    {
-        try
+        public CategoryController(ICategoryRepository categoryRepository)
         {
-            var success = await _categoryRepository.DeleteCategory(id);
-            if (!success)
-            {
+            _categoryRepository = categoryRepository;
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateCategory([FromBody] CategoryDto category)
+        {
+            if (category == null || string.IsNullOrWhiteSpace(category.Name))
+                return BadRequest("Category name is required.");
+
+            var newCategory = await _categoryRepository.CreateCategory(category.Name);
+            return Ok(new CategoryDto { Id = newCategory.Id, Name = newCategory.Name });
+        }
+
+        [AllowAnonymous]
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            var categories = await _categoryRepository.GetCategories();
+            return Ok(categories);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryDto category)
+        {
+            if (category == null || string.IsNullOrWhiteSpace(category.Name))
+                return BadRequest("Category name is required.");
+
+            var updatedCategory = await _categoryRepository.UpdateCategory(id, category.Name);
+            if (updatedCategory == null)
                 return NotFound("Category not found.");
-            }
-            return Ok("Category deleted successfully.");
+
+            return Ok(updatedCategory);
         }
-        catch (InvalidOperationException ex)
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteCategory(int id)
         {
-            return BadRequest(ex.Message); // Возвращаем сообщение об ошибке
+            try
+            {
+                var success = await _categoryRepository.DeleteCategory(id);
+                if (!success)
+                    return NotFound("Category not found.");
+
+                return Ok("Category deleted successfully.");
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
-
 }
