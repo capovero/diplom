@@ -105,7 +105,11 @@ public class ProjectRepository : IProjectRepository
         }
         
         if (!string.IsNullOrWhiteSpace(filter.Title))
-            query = query.Where(p => p.Title.Contains(filter.Title));
+        {
+            var lowerTitle = filter.Title.ToLower();
+            query = query.Where(p => p.Title.ToLower().Contains(lowerTitle));
+        }
+
 
         if (filter.CategoryId.HasValue && filter.CategoryId.Value > 0)
         {
