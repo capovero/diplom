@@ -28,21 +28,58 @@ public class UserController : ControllerBase
         return Ok(users.Select(u => u.ToResponseDto()));
     }
 
-    [Authorize]
-    [HttpGet("me")]
-    public async Task<IActionResult> GetMyProfile()
+    // [Authorize]
+    // [HttpGet("me")]
+    // public async Task<IActionResult> GetMyProfile()
+    // {
+    //     var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+    //     var user = await _userRepo.GetProfileAsync(userId);
+    //     return Ok(user.ToAdminProfileDto());
+    // }
+    //
+    // // [Authorize(Roles = "Admin")]
+    // [AllowAnonymous]
+    // [HttpGet("{id}")]
+    // public async Task<IActionResult> GetAdminProfile(Guid id)
+    // {
+    //     var user = await _userRepo.GetAdminProfileAsync(id);
+    //     return Ok(user.ToAdminProfileDto());
+    // }
+    [AllowAnonymous]
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetProfile(Guid id)
     {
-        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-        var user = await _userRepo.GetProfileAsync(userId);
-        return Ok(user.ToAdminProfileDto());
+        var userEntity = await _userRepo.GetAdminProfileAsync(id);
+        if (userEntity == null)
+            return NotFound();
+        
+        var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var isAdmin = User.IsInRole("Admin");
+
+        if (isAdmin || currentUserId == id.ToString())
+        {
+            return Ok(userEntity.ToAdminProfileDto());
+        }
+        else
+        {
+            return Ok(userEntity.ToUserProfileDto());
+        }
     }
 
-    [Authorize(Roles = "Admin")]
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetAdminProfile(Guid id)
+    [HttpGet("me")]
+    [Authorize] 
+    public async Task<IActionResult> GetMyProfile()
     {
-        var user = await _userRepo.GetAdminProfileAsync(id);
-        return Ok(user.ToAdminProfileDto());
+        var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(currentUserId))
+            return Unauthorized();
+
+        var guid = Guid.Parse(currentUserId);
+        var userEntity = await _userRepo.GetAdminProfileAsync(guid);
+        if (userEntity == null)
+            return NotFound();
+
+        return Ok(userEntity.ToAdminProfileDto());
     }
 
     [Authorize]
