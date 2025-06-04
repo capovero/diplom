@@ -154,11 +154,25 @@ public class UserController : ControllerBase
         return Ok(new { Message = "Successfully logged out" });
     }
     
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "AdminPolicy")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUserById(Guid id)
     {
-        var success = await _userRepo.DeleteByIdAsync(id);
-        return success ? NoContent() : NotFound();
+        try
+        {
+            var success = await _userRepo.DeleteByIdAsync(id);
+            if (!success)
+                return NotFound("Пользователь не найден");
+
+            return NoContent();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "Внутренняя ошибка сервера");
+        }
     }
 }

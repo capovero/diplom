@@ -86,12 +86,83 @@ public class UserRepository : IUserRepository
             .FirstOrDefaultAsync(u => u.UserName == userName);
     }
     
-    public async Task<bool> DeleteByIdAsync(Guid id)
+   public async Task<bool> DeleteByIdAsync(Guid id)
     {
         var user = await _context.Users.FindAsync(id);
-        if (user == null) return false;
+        if (user == null) 
+            return false;
+        
+        var userDonations = await _context.Donations
+            .Where(d => d.UserId == id)
+            .ToListAsync();
 
+        foreach (var don in userDonations)
+        {
+            var proj = await _context.Projects.FindAsync(don.ProjectId);
+            if (proj != null)
+            {
+                proj.CollectedAmount -= don.Amount;
+                if (proj.CollectedAmount < 0) 
+                    proj.CollectedAmount = 0;
+                _context.Projects.Update(proj);
+            }
+        }
+        _context.Donations.RemoveRange(userDonations);
+        
+        var userReviews = await _context.Reviews
+            .Where(r => r.UserId == id)
+            .ToListAsync();
+        
+        var affectedProjectIds = userReviews
+            .Select(r => r.ProjectId)
+            .Distinct()
+            .ToList();
+        
+        _context.Reviews.RemoveRange(userReviews);
+        
+        foreach (var pid in affectedProjectIds)
+        {
+            var remainingReviews = await _context.Reviews
+                .Where(r => r.ProjectId == pid)
+                .ToListAsync();
+
+            var proj = await _context.Projects.FindAsync(pid);
+            if (proj != null)
+            {
+                if (remainingReviews.Any())
+                {
+                    proj.AverageRating = (float)remainingReviews.Average(r => r.Rating);
+                }
+                else
+                {
+                    proj.AverageRating = 0;
+                }
+                _context.Projects.Update(proj);
+            }
+        }
+        await _context.SaveChangesAsync();
+        
+        var userProjects = await _context.Projects
+            .Where(p => p.UserId == id)
+            .ToListAsync();
+
+        foreach (var p in userProjects)
+        {
+            var donationsOfProject = await _context.Donations
+                .Where(d => d.ProjectId == p.Id)
+                .ToListAsync();
+            _context.Donations.RemoveRange(donationsOfProject);
+            
+            var reviewsOfProject = await _context.Reviews
+                .Where(r => r.ProjectId == p.Id)
+                .ToListAsync();
+            _context.Reviews.RemoveRange(reviewsOfProject);
+            
+            _context.Projects.Remove(p);
+        }
+        
         _context.Users.Remove(user);
+        
         await _context.SaveChangesAsync();
         return true;
     }
